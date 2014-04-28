@@ -1,0 +1,9 @@
+<?php $this->headTitle('Edit Page') ?>
+<?=$this->ztbFlashMessenger()->render(); ?>
+
+<?=$this->partial('uthando-navigation/page/page-form', array(
+	'form' => $this->form,
+	'formAction' => 'edit',
+    'pageId' => $this->page->getPageId(),
+	'menuId' => $this->page->getMenuId()
+));?>
