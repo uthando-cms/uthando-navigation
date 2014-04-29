@@ -1,0 +1,26 @@
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'menu',
+	'searchInputs'	=> [
+		'Menu' => 'menu',
+	],
+]);?>
+
+<div id="table-menu">
+	<?=$this->partial('uthando-navigation/menu/list', [
+	    'models' => $this->models
+	]); ?>
+</div>
+
+
+<?php $this->inlineScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-menu').dataGrid({
+    	url : 'menu/list',
+    	query: { sort : 'name' },
+    	searchForm : $('#search-menu'),
+    	paging : 'links',
+    	columnSort: true
+	});
+});
+<?php $this->inlineScript()->captureEnd(); ?>

@@ -4,7 +4,7 @@ namespace UthandoNavigation\Form;
 
 use Zend\Form\Form;
 
-class Page extends Form
+class MenuItem extends Form
 {
 	/**
 	 * @var array
@@ -12,19 +12,19 @@ class Page extends Form
     protected $config;
     
     /**
-     * @var \UthandoNavigation\Model\Mapper\Page
+     * @var \UthandoNavigation\Model\Mapper\MenuItem
      */
-    protected $pageMapper;
+    protected $menuItemMapper;
     
 	public function __construct()
 	{
-		parent::__construct('Page');
+		parent::__construct('Menu Item');
 	}
 	
 	public function init()
 	{
 		$this->add([
-			'name' => 'pageId',
+			'name' => 'menuItemId',
 			'type' => 'hidden',
 		]);
 		
@@ -106,20 +106,20 @@ class Page extends Form
 		$this->config = $config;
 	}
 	
-	public function setPageMapper($mapper)
+	public function setMenuItemMapper($mapper)
 	{
-		$this->pageMapper = $mapper;
+		$this->menuItemMapper = $mapper;
 	}
 	
-	public function getPageSelect($menuId)
+	public function getMenuItemSelect($menuId)
 	{    
-	    $pages = $this->pageMapper->getPagesByMenuId($menuId);
-	    $pagesOptions = [];
+	    $items = $this->menuItemMapper->getMenuItemsByMenuId($menuId);
+	    $menuItemOptions = [];
 	    
-	    $pagesOptions[0] = 'Add to top of menu';
+	    $menuItemOptions[0] = 'Add to top of menu';
 	    
-	    foreach($pages as $page){
-	        $pagesOptions[$page->getPageId()] = $page->getLabel();
+	    foreach($items as $item){
+	        $menuItemOptions[$item->getMenuItemId()] = $item->getLabel();
 	    }
 	    
 	    $this->add([
@@ -129,7 +129,7 @@ class Page extends Form
 	            'label' => 'Location In Menu:',
 	            'required' => true,
 	            'empty_option' => '---Please Select a page---',
-	            'value_options' => $pagesOptions
+	            'value_options' => $menuItemOptions
 	        ],
 	    ]);
 	    

@@ -1,0 +1,15 @@
+<?php $this->headTitle('Edit Page') ?>
+
+<?=$this->partial('uthando-navigation/menu-item/add-edit-form', [
+	'form' 			=> $this->form,
+	'formAction' 	=> 'edit',
+	'formName'		=> 'Menu Item',
+    'primaryKey'    => $this->model->getMenuItemId(),
+	'postRoute'		=> 'admin/menu-item/edit',
+    'routeParams'   => ['menuId' => $this->model->getMenuId()],
+    'menuId'        => $this->model->getMenuId(),
+	'cancelRoute'	=> 'admin/menu-item',
+	'formElements'	=> [
+		'label', 'route', 'params', 'resource', 'visible', 'menuId', 'menuItemId'
+	],
+]); ?>

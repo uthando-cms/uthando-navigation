@@ -3,7 +3,6 @@
 namespace UthandoNavigation\Controller;
 
 use UthandoCommon\Controller\AbstractCrudController;
-use Zend\View\Model\ViewModel;
 
 class MenuController extends AbstractCrudController
 {
@@ -11,10 +10,4 @@ class MenuController extends AbstractCrudController
 	protected $serviceName = 'UthandoNavigation\Service\Menu';
 	protected $route = 'admin/menu';
 	
-    public function listAction()
-    {	
-        return new ViewModel([
-        	'menus' => $this->getService()->fetchAll()
-        ]);
-    }
 }

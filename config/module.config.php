@@ -6,13 +6,13 @@ return [
 			'admin' => [
 				'privileges' => [
 					['controller' => 'UthandoNavigation\Controller\Menu', 'action' => 'all'],
-					['controller' => 'UthandoNavigation\Controller\Page', 'action' => 'all'],
+					['controller' => 'UthandoNavigation\Controller\MenuItem', 'action' => 'all'],
 				],
 			],
 		],
 		'userResources' => [
 			'UthandoNavigation\Controller\Menu',
-			'UthandoNavigation\Controller\Page',
+			'UthandoNavigation\Controller\MenuItem',
 			'menu:admin', 'menu:guest', 'menu:user',
 		],
 	],
@@ -23,35 +23,93 @@ return [
         			'menu' => [
         				'type'    => 'Segment',
         				'options' => [
-        					'route'    => '/menu[/:action[/id/[:id]]]',
-        					'constraints' => [
-        						'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-        						'id' 		 => '\d+'
-        					],
+        					'route'    => '/menu',
         					'defaults' => [
         						'__NAMESPACE__' => 'UthandoNavigation\Controller',
         						'controller'    => 'Menu',
-        						'action'        => 'list',
+        						'action'        => 'index',
         					    'force-ssl'     => 'ssl'
         					],
         				],
+        				'may_terminate' => true,
+        				'child_routes' => [
+        				    'edit' => [
+        				        'type'    => 'Segment',
+    				            'options' => [
+        				            'route'         => '/[:action[/id/[:id]]]',
+        				            'constraints'   => [
+        				                'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+        				                'id'		=> '\d+'
+        				            ],
+        				            'defaults'      => [
+        				                'action'        => 'edit',
+        				                'force-ssl'     => 'ssl'
+				                    ],
+                                ],
+			                ],
+			                'page' => [
+				                'type'    => 'Segment',
+				                'options' => [
+    				                'route'         => '/page/[:page]',
+    				                'constraints'   => [
+        								'page'			=> '\d+'
+							        ],
+							        'defaults'      => [
+								        'action'        => 'list',
+								        'page'          => 1,
+								        'force-ssl'     => 'ssl'
+					                ],
+				                ],
+			                ],
+                        ],
         			],
-        			'page' => [
+        			'menu-item' => [
         				'type'    => 'Segment',
         				'options' => [
-        					'route'    => '/page[/:action[/menuId/[:menuId]][/id/[:id]]]',
+        					'route'    => '/menu-item[/menuId/[:menuId]]',
         					'constraints' => [
-        						'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-        						'id' 		 => '\d+',
-        						'menuId' 	 => '\d+'
+        						//'id' 		 => '\d+',
+        						'menuId' 	 => '\d+',
         					],
         					'defaults' => [
         						'__NAMESPACE__' => 'UthandoNavigation\Controller',
-        						'controller'    => 'Page',
-        						'action'        => 'list',
+        						'controller'    => 'MenuItem',
+        						'action'        => 'index',
         					    'force-ssl'     => 'ssl'
         					],
         				],
+        				'may_terminate' => true,
+        				'child_routes' => [
+        				    'edit' => [
+        				        'type'    => 'Segment',
+        				        'options' => [
+        				            'route'         => '/[:action[/id/[:id]]]',
+        				            'constraints'   => [
+        				                'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+        				                //'menuId' 	=> '\d+',
+    				                    'id'		=> '\d+'
+        				            ],
+        				            'defaults'      => [
+        				                'action'        => 'edit',
+        				                'force-ssl'     => 'ssl'
+    				                ],
+				                ],
+			                ],
+			                'page' => [
+				                'type'    => 'Segment',
+				                'options' => [
+    				                'route'         => '/page/[:page]',
+    				                'constraints'   => [
+        								'page'			=> '\d+'
+							        ],
+							        'defaults'      => [
+								        'action'        => 'list',
+								        'page'          => 1,
+								        'force-ssl'     => 'ssl'
+					                ],
+				                ],
+			                ],
+		                ],
         			],
         		],
         	],
@@ -71,7 +129,7 @@ return [
             		'add' => [
             			'label'      => 'Add New Menu',
             			'action'     => 'add',
-            			'route'      => 'admin/menu',
+            			'route'      => 'admin/menu/edit',
             			'resource'   => 'menu:admin'
             		],
             	],

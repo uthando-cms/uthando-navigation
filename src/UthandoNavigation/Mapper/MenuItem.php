@@ -2,15 +2,25 @@
 namespace UthandoNavigation\Mapper;
 
 use UthandoCommon\Mapper\AbstractNestedSet;
+use Zend\Db\Sql\Select;
 
-class Page extends AbstractNestedSet
+class MenuItem extends AbstractNestedSet
 {
-	protected $table = 'page';
-	protected $primary = 'pageId';
-	protected $model = 'UthandoNavigation\Model\Page';
-	protected $hydrator = 'UthandoNavigation\Hydrator\Page';
+	protected $table = 'menuItem';
+	protected $primary = 'menuItemId';
+	protected $model = 'UthandoNavigation\Model\MenuItem';
+	protected $hydrator = 'UthandoNavigation\Hydrator\MenuItem';
+	protected $menuId;
+	
+	public function search(array $search, $sort, Select $select = null)
+	{
+	    $select = $this->getSelect();
+	    $select->where->equalTo('menuId', $this->getMenuId());
+	    
+	    return parent::search($search, $sort, $select);
+	}
     
-    public function getPagesByMenuId($id)
+    public function getMenuItemsByMenuId($id)
     {   
         $select = $this->getFullTree();
         $select->reset('where');
@@ -19,7 +29,7 @@ class Page extends AbstractNestedSet
     	return $this->fetchResult($select);
     }
     
-    public function getPagesByMenu($menu)
+    public function getMenuItemsByMenu($menu)
     {
         $select = $this->getFullTree();
         $select->reset('where');
@@ -32,7 +42,7 @@ class Page extends AbstractNestedSet
         return $this->fetchResult($select);
     }
     
-    public function getPageByMenuIdAndLabel($menuId, $label)
+    public function getMenuItemByMenuIdAndLabel($menuId, $label)
     {
     	$select = $this->getSelect()->where(['menuId' => $menuId, 'label' => $label]);
     	$rowSet = $this->fetchResult($select);
@@ -40,7 +50,7 @@ class Page extends AbstractNestedSet
     	return $row;
     }
     
-    public function deletePagesByMenuId($id)
+    public function deleteMenuItemsByMenuId($id)
     {
     	$sql = $this->getSql();
     	$delete = $sql->delete($this->table);
@@ -51,4 +61,22 @@ class Page extends AbstractNestedSet
     	
     	return $statement->execute();
     }
+    
+	/**
+     * @return the $menuId
+     */
+    public function getMenuId ()
+    {
+        return $this->menuId;
+    }
+
+	/**
+     * @param field_type $menuId
+     */
+    public function setMenuId ($menuId)
+    {
+        $this->menuId = $menuId;
+        return $this;
+    }
+
 }

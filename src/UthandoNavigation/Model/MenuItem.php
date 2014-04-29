@@ -5,14 +5,14 @@ namespace UthandoNavigation\Model;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
-class Page implements ModelInterface
+class MenuItem implements ModelInterface
 {   
     use Model;
     
 	/**
 	 * @var int
 	 */
-	protected $pageId;
+	protected $menuItemId;
 	
 	/**
 	 * @var int
@@ -65,19 +65,19 @@ class Page implements ModelInterface
 	protected $depth;
 	
 	/**
-	 * @return the $pageId
+	 * @return the $menuItemId
 	 */
-	public function getPageId()
+	public function getMenuItemId()
 	{
-		return $this->pageId;
+		return $this->menuItemId;
 	}
 
 	/**
-	 * @param number $pageId
+	 * @param number $menuItemId
 	 */
-	public function setPageId($pageId)
+	public function setMenuItemId($menuItemId)
 	{
-		$this->pageId = $pageId;
+		$this->menuItemId = $menuItemId;
 		return $this;
 	}
 
@@ -244,7 +244,7 @@ class Page implements ModelInterface
 	
 	/**
 	 * @param number $depth
-	 * @return \UthandoNavigation\Model\Entity\Page
+	 * @return \UthandoNavigation\Model\MenuItem
 	 */
 	public function setDepth($depth)
 	{

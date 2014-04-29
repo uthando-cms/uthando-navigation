@@ -9,38 +9,38 @@ class NavigationForm extends AbstractViewHelper
 {
 	public function __invoke()
     {
-    	/* @var $gateway \UthandoNavigation\Service\Page */
-        $pageMapper = $this->getServiceLocator()->getServiceLocator()->get('UthandoNavigation\Service\Page');
-        $pages = $pageMapper->fetchAll();
+    	/* @var $menuItemMapper \UthandoNavigation\Service\MenuItem */
+        $menuItemMapper = $this->getServiceLocator()->getServiceLocator()->get('UthandoNavigation\Service\MenuItem');
+        $menuItems = $menuItemMapper->fetchAll();
         
         /* @var $menuMapper \UthandoNavigation\Service\Menu */
         $menuMapper = $this->getServiceLocator()->getServiceLocator()->get('UthandoNavigation\Service\Menu');
         $menus = $menuMapper->fetchAll();
         
         $select = new Element\Select('position');
-        $pagesOptions = [];
+        $menuItemsOptions = [];
         $menuArray = [];
         
         foreach ($menus as $menu) {
             $menuArray[$menu->getMenuId()] = $menu->getMenu();
             
-            $pagesOptions[$menu->getMenuId()]['options'][$menu->getMenuId() . '-' . '0'] = 'At top of this menu';
-            $pagesOptions[$menu->getMenuId()]['empty_option'] = '---Please Select a page---';
-            $pagesOptions[$menu->getMenuId()]['label'] = $menu->getMenu();
+            $menuItemsOptions[$menu->getMenuId()]['options'][$menu->getMenuId() . '-' . '0'] = 'At top of this menu';
+            $menuItemsOptions[$menu->getMenuId()]['empty_option'] = '---Please Select a page---';
+            $menuItemsOptions[$menu->getMenuId()]['label'] = $menu->getMenu();
             
         }
         
-        /* @var $page \UthandoNavigation\Model\Entity\Page */
-        foreach ($pages as $page) {
+        /* @var $page \UthandoNavigation\Model\MenuItem */
+        foreach ($menuItems as $menuItem) {
             
-            $ident = ($page->getDepth() > 0) ? str_repeat('%space%%space%',($page->getDepth())) . '%bull%%space%' : '';
+            $ident = ($menuItem->getDepth() > 0) ? str_repeat('%space%%space%',($menuItem->getDepth())) . '%bull%%space%' : '';
             
-            $pagesOptions[$page->getMenuId()]['options'][$page->getMenuId() . '-' . $page->getPageId()] = $ident . $page->getLabel();
+            $menuItemsOptions[$menuItem->getMenuId()]['options'][$menuItem->getMenuId() . '-' . $menuItem->getMenuItemId()] = $ident . $menuItem->getLabel();
         }
         
         $select = new Element\Select('position');
         $select->setLabel('Location In Menu:');
-        $select->setValueOptions($pagesOptions);
+        $select->setValueOptions($menuItemsOptions);
         $select->setEmptyOption('Please select a Position');
         
         $element = $this->view->plugin('ztbFormElement');

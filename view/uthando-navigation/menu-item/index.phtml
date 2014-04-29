@@ -1,0 +1,32 @@
+
+<?=$this->partial('uthando-admin/partial/search', [
+	'name'			=> 'menuItem',
+	'searchInputs'	=> [
+		'Menu Item' => 'menuItemId',
+	],
+]);?>
+
+<a href="<?=$this->url('admin/menu-item/edit', [
+		'menuId' => $this->menuId,
+		'action' => 'add',
+	]); ?>" class="btn">Add Page</a>
+<div class="clear">&nbsp;</div>
+
+<div id="table-menuItem">
+	<?=$this->partial('uthando-navigation/menu-item/list', [
+	    'models' => $this->models,
+	    'menuId' => $this->menuId,
+	]); ?>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+$(document).ready(function(){
+	$('#table-menuItem').dataGrid({
+    	url : '<?=$this->menuId?>/list',
+    	query: { sort : 'name' },
+    	searchForm : $('#search-menuItem'),
+    	paging : 'links',
+    	columnSort: true
+	});
+});
+<?php $this->inlineScript()->captureEnd(); ?>

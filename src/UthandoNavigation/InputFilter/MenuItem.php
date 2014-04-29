@@ -3,7 +3,7 @@ namespace UthandoNavigation\InputFilter;
 
 use Zend\InputFilter\InputFilter;
 
-class Page extends InputFilter
+class MenuItem extends InputFilter
 {
 	public function __construct()
 	{
@@ -13,7 +13,7 @@ class Page extends InputFilter
             'filters'    => [
                 ['name'    => 'StripTags'],
                 ['name'    => 'StringTrim'],
-                ['name'    => 'Application\Filter\Ucwords'],
+                ['name'    => 'UthandoCommon\Filter\Ucwords'],
             ],
             'validators' => [
                 ['name'    => 'StringLength', 'options' => [
