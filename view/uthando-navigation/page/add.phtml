@@ -1,9 +1,8 @@
 <?php $this->headTitle('Add Page') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('uthando-navigation/page/page-form', array(
+<?=$this->partial('uthando-navigation/page/page-form', [
 	'form' => $this->form,
 	'formAction' => 'add',
 	'menuId' => $this->menuId
-));?>
+]);?>
 

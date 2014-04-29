@@ -11,9 +11,9 @@ class Menu extends AbstractHydrator
 	 */
 	public function extract($object)
 	{
-		return array(
+		return [
 			'menuId'	=> $object->getMenuId(),
 			'menu'		=> $object->getMenu()
-		);
+		];
 	}
 }

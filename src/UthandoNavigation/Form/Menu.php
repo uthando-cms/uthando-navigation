@@ -10,21 +10,21 @@ class Menu extends Form
 	{
 		parent::__construct('Menu');
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'menuId',
 			'type' => 'hidden',
-		));
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'menu',
 			'type' => 'text',
-			'options' => array(
+			'options' => [
 				'label' => 'Menu Title:',
 				'required' => true,
-			),
-			'attributes' => array(
+			],
+			'attributes' => [
 				'placeholder' => 'Menu Title:',
-			),
-		));
+			],
+		]);
 	}
 }

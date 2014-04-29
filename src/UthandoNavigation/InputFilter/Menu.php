@@ -7,23 +7,23 @@ class Menu extends InputFilter
 {
 	public function __construct()
 	{
-		$this->add(array(
+		$this->add([
             'name'       => 'menu',
             'required'   => true,
-            'filters'    => array(
-                array('name'    => 'StripTags'),
-                array('name'    => 'StringTrim'),
-            ),
-            'validators' => array(
-                array(
+            'filters'    => [
+                ['name'    => 'StripTags'],
+                ['name'    => 'StringTrim'],
+            ],
+            'validators' => [
+                [
                     'name'    => 'StringLength',
-                    'options' => array(
+                    'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 2,
                         'max'      => 255,
-                    ),
-                ),
-            ),
-		));
+                    ],
+                ],
+            ],
+		]);
 	}
 }

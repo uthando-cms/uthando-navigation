@@ -1,8 +1,7 @@
 <?php $this->headTitle('Edit Menu') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('uthando-navigation/menu/menu-form', array(
+<?=$this->partial('uthando-navigation/menu/menu-form', [
 	'form' => $this->form,
 	'formAction' => 'edit',
 	'menuId' => $this->menu->menuId
-));?>
+]);?>

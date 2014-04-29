@@ -1,7 +1,6 @@
 <?php $this->headTitle('Add Menu') ?>
-<?=$this->ztbFlashMessenger()->render(); ?>
 
-<?=$this->partial('uthando-navigation/menu/menu-form', array(
+<?=$this->partial('uthando-navigation/menu/menu-form', [
 	'form' => $this->form,
 	'formAction' => 'add',
-));?>
+]);?>

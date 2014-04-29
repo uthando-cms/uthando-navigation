@@ -13,7 +13,7 @@ class Page extends AbstractHydrator
 	 */
 	public function extract($object)
 	{
-		$data = array(
+		$data = [
 			'pageId'	=> $object->getPageId(),
 			'menuId'	=> $object->getMenuId(),
 			'label'		=> $object->getLabel(),
@@ -24,7 +24,7 @@ class Page extends AbstractHydrator
 			'visible'	=> $object->getVisible(),
 			'lft'		=> $object->getLft(),
 			'rgt'		=> $object->getRgt()
-		);
+		];
 		
 		if (true === $this->addDepth) {
 			$data['depth'] = $object->getDepth();

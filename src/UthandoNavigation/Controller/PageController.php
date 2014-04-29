@@ -23,10 +23,10 @@ class PageController extends AbstractActionController
     	
     	if (!$menuId) return $this->redirect()->toRoute('admin/menu');
     	
-        return new ViewModel(array(
+        return new ViewModel([
         	'pages' => $this->getPageService()->getPagesByMenuId($menuId),
         	'menuId' => $menuId
-        ));
+        ]);
     }
     
     public function addAction()
@@ -43,10 +43,10 @@ class PageController extends AbstractActionController
 					'There were one or more isues with your submission. Please correct them as indicated below.'
 				);
 				
-				return new ViewModel(array(
+				return new ViewModel([
 					'form' => $result,
 					'menuId' => $menuId
-				));
+				]);
 				
 			} else {
 				if ($result) {
@@ -60,14 +60,14 @@ class PageController extends AbstractActionController
 				}
 				
 				// Redirect to list of articles
-				return $this->redirect()->toRoute('admin/page', array('menuId' => $menuId));
+				return $this->redirect()->toRoute('admin/page', ['menuId' => $menuId]);
 			}
 		}
 		
-		return new ViewModel(array(
+		return new ViewModel([
 			'form' => $this->getPageService()->getForm(),
 			'menuId' => $menuId
-		));	
+		]);	
     
     }
     
@@ -77,10 +77,10 @@ class PageController extends AbstractActionController
     
     	$id = (int) $this->params()->fromRoute('id', 0);
     	if (!$id) {
-    		return $this->redirect()->toRoute('admin/page', array(
+    		return $this->redirect()->toRoute('admin/page', [
     			'action' => 'add',
     			'menuId' => $menuId
-    		));
+    		]);
     	}
     
     	// Get the Page with the specified id.  An exception is thrown
@@ -88,9 +88,9 @@ class PageController extends AbstractActionController
     	try {
     		$page = $this->getPageService()->getById($id);
     	} catch (\Exception $e) {
-    		return $this->redirect()->toRoute('admin/page', array(
+    		return $this->redirect()->toRoute('admin/page', [
     			'action' => 'list'
-    		));
+    		]);
     	}
     
     	$request = $this->getRequest();
@@ -104,10 +104,10 @@ class PageController extends AbstractActionController
 					'There were one or more isues with your submission. Please correct them as indicated below.'
 				);
 				
-				return new ViewModel(array(
+				return new ViewModel([
 					'form' => $result,
 					'page' => $page,
-				));
+				]);
 			} else {
 				if ($result) {
 					$this->flashMessenger()->addSuccessMessage(
@@ -120,14 +120,14 @@ class PageController extends AbstractActionController
 				}
 				
 				// Redirect to list of pages
-				return $this->redirect()->toRoute('admin/page', array('menuId' => $menuId));
+				return $this->redirect()->toRoute('admin/page', ['menuId' => $menuId]);
 			}
 		}
 		
-		return new ViewModel(array(
+		return new ViewModel([
             'form' => $this->getPageService()->getForm($page),
             'page' => $page
-        ));
+        ]);
     }
     
 	public function deleteAction()
@@ -160,10 +160,10 @@ class PageController extends AbstractActionController
 			}
 		
 			// Redirect to list of menu
-			return $this->redirect()->toRoute('admin/page', array('menuId' => $menuId));
+			return $this->redirect()->toRoute('admin/page', ['menuId' => $menuId]);
 		}
 		
-		return $this->redirect()->toRoute('admin/page', array('menuId' => $menuId));
+		return $this->redirect()->toRoute('admin/page', ['menuId' => $menuId]);
 	}
 	
 	/**

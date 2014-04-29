@@ -74,7 +74,7 @@ class AclMenu extends AbstractViewHelper
         
         if ($partial) {
             if (is_string($partial)) {
-                $partial = array($partial, 'default');
+                $partial = [$partial, 'default'];
             }
         
             $nav->$m()->setPartial($partial);
@@ -92,7 +92,7 @@ class AclMenu extends AbstractViewHelper
         
         $pages = $service->getPagesByMenu($menu, true);
         
-        $pageArray = array();
+        $pageArray = [];
         
         /* @var $page \Navigation\Model\Page */
         foreach ($pages as $page) {
@@ -127,8 +127,8 @@ class AclMenu extends AbstractViewHelper
     
     public function listToMultiArray($arrs)
     {
-        $nested = array();
-        $depths = array();
+        $nested = [];
+        $depths = [];
     
         foreach($arrs as $key => $arr) {
             

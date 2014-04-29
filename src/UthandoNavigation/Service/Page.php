@@ -83,7 +83,7 @@ class Page extends AbstractService
 				$id = $data[$pk];
 				unset($data[$pk]);
 				
-				$result = $this->getMapper()->update($data, array($pk => $id));
+				$result = $this->getMapper()->update($data, [$pk => $id]);
 			}
 		} else {
 			throw new Exception('Page id does not exist');

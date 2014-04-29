@@ -23,82 +23,82 @@ class Page extends Form
 	
 	public function init()
 	{
-		$this->add(array(
+		$this->add([
 			'name' => 'pageId',
 			'type' => 'hidden',
-		));
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'menuId',
 			'type' => 'hidden',
-		));
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'label',
 			'type' => 'text',
-			'options' => array(
+			'options' => [
 				'label' => 'Label:',
 				'required' => true,
-			),
-			'attributes' => array(
+			],
+			'attributes' =>[
 				'placeholder' => 'Label:',
-			),
-		));
+			],
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'params',
 			'type' => 'textarea',
-			'options' => array(
+			'options' => [
 				'label' => 'Params:',
 				'required' => false,
-			),
-			'attributes' => array(
+			],
+			'attributes' => [
 				'placeholder' => 'Params:',
-			),
-		));
+			],
+		]);
 		
 		$routes = $this->config['router']['routes'];
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'route',
 			'type' => 'select',
-			'options' => array(
+			'options' => [
 				'label' => 'Route:',
 				'required' => false,
 				'empty_option' => '---Please Select a Route---',
 				'value_options' => $this->getRouteSelect($routes)
-			),
-		));
+			],
+		]);
 		
 		$resources = $this->config['userAcl']['userResources'];
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'resource',
 			'type' => 'select',
-			'options' => array(
+			'options' => [
 				'label' => 'Resource:',
 				'required' => false,
 				'empty_option' => 'None',
 				'value_options' => $this->getResourceSelect($resources)
-			),
-			'attributes' => array(
+			],
+			'attributes' => [
 				'placeholder' => 'Resource:',
-			),
-		));
+			],
+		]);
 		
-		$this->add(array(
+		$this->add([
 			'name' => 'visible',
 			'type' => 'select',
-			'options' => array(
+			'options' => [
 				'label' => 'Is Visible:',
 				'required' => true,
 				'empty_option' => '---Please select option---',
-				'value_options' => array(
+				'value_options' => [
 					'0'	=> 'No',
 					'1'	=> 'Yes',
-				),
-			),
-		));
+				],
+			],
+		]);
 	}
 	
 	public function setConfig($config)
@@ -114,7 +114,7 @@ class Page extends Form
 	public function getPageSelect($menuId)
 	{    
 	    $pages = $this->pageMapper->getPagesByMenuId($menuId);
-	    $pagesOptions = array();
+	    $pagesOptions = [];
 	    
 	    $pagesOptions[0] = 'Add to top of menu';
 	    
@@ -122,23 +122,23 @@ class Page extends Form
 	        $pagesOptions[$page->getPageId()] = $page->getLabel();
 	    }
 	    
-	    $this->add(array(
+	    $this->add([
 	        'name' => 'position',
 	        'type' => 'select',
-	        'options' => array(
+	        'options' => [
 	            'label' => 'Location In Menu:',
 	            'required' => true,
 	            'empty_option' => '---Please Select a page---',
 	            'value_options' => $pagesOptions
-	        ),
-	    ));
+	        ],
+	    ]);
 	    
 	    return $this->get('position');
 	}
 	
 	public function getResourceSelect($resources)
 	{
-	    $routeArray = array();
+	    $routeArray = [];
 	    foreach($resources as $val){
 	        $routeArray[$val] = $val;
 	    }
@@ -148,7 +148,7 @@ class Page extends Form
 	
 	public function getRouteSelect($routes)
 	{
-	   $routeArray = array(0 => 'Category Heading');
+	   $routeArray = [0 => 'Category Heading'];
 	   foreach($routes as $key => $val){
 	       $routeArray[$key] = $key;
 	       if (isset($val['child_routes'])) {

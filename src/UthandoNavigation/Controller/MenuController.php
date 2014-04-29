@@ -13,8 +13,8 @@ class MenuController extends AbstractCrudController
 	
     public function listAction()
     {	
-        return new ViewModel(array(
+        return new ViewModel([
         	'menus' => $this->getService()->fetchAll()
-        ));
+        ]);
     }
 }

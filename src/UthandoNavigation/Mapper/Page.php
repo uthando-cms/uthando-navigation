@@ -14,7 +14,7 @@ class Page extends AbstractNestedSet
     {   
         $select = $this->getFullTree();
         $select->reset('where');
-        $select->where(array('child.menuId' => $id));
+        $select->where(['child.menuId' => $id]);
     	
     	return $this->fetchResult($select);
     }
@@ -26,15 +26,15 @@ class Page extends AbstractNestedSet
         $select->join(
         	'menu',
             'child.menuId = menu.menuId',
-            array()
-        )->where(array('menu.menu' => $menu));
+            []
+        )->where(['menu.menu' => $menu]);
         
         return $this->fetchResult($select);
     }
     
     public function getPageByMenuIdAndLabel($menuId, $label)
     {
-    	$select = $this->getSelect()->where(array('menuId' => $menuId, 'label' => $label));
+    	$select = $this->getSelect()->where(['menuId' => $menuId, 'label' => $label]);
     	$rowSet = $this->fetchResult($select);
     	$row = $rowSet->current();
     	return $row;
@@ -45,7 +45,7 @@ class Page extends AbstractNestedSet
     	$sql = $this->getSql();
     	$delete = $sql->delete($this->table);
     	
-    	$delete->where(array('menuId' => $id));
+    	$delete->where(['menuId' => $id]);
     	
     	$statement = $sql->prepareStatementForSqlObject($delete);
     	

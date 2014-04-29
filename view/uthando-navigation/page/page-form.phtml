@@ -1,6 +1,6 @@
 <?php
 $form = $this->form;
-$routeArray = array('action' => $this->formAction);
+$routeArray = ['action' => $this->formAction];
 if (isset($this->menuId)) $routeArray['menuId'] = $this->menuId;
 if (isset($this->pageId)) $routeArray['id'] = $this->pageId;
 
@@ -48,10 +48,10 @@ if (isset($this->pageId)) $routeArray['id'] = $this->pageId;
                 <button type="submit" class="btn btn-primary" 
                 data-loading-text="Please wait...">Submit</button>
                 <button type="button" class="btn btn-warning" 
-                data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/page', array(
+                data-loading-text="Please wait..." onClick="window.location = '<?=$this->url('admin/page', [
                         'action' => 'list',
                         'menuId' => $this->menuId
-                    ));?>';">Cancel</button>
+                    ]);?>';">Cancel</button>
             </div>
         </div>
         </fieldset>

@@ -18,8 +18,8 @@ class NavigationForm extends AbstractViewHelper
         $menus = $menuMapper->fetchAll();
         
         $select = new Element\Select('position');
-        $pagesOptions = array();
-        $menuArray = array();
+        $pagesOptions = [];
+        $menuArray = [];
         
         foreach ($menus as $menu) {
             $menuArray[$menu->getMenuId()] = $menu->getMenu();
