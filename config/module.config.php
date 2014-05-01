@@ -2,18 +2,20 @@
 
 return [
 	'userAcl' => [
-		'userRoles' => [
-			'admin' => [
-				'privileges' => [
-					['controller' => 'UthandoNavigation\Controller\Menu', 'action' => 'all'],
-					['controller' => 'UthandoNavigation\Controller\MenuItem', 'action' => 'all'],
-				],
-			],
-		],
-		'userResources' => [
-			'UthandoNavigation\Controller\Menu',
-			'UthandoNavigation\Controller\MenuItem',
-			'menu:admin', 'menu:guest', 'menu:user',
+        'userRoles' => [
+            'admin' => [
+                'privileges' => [
+                    ['controller' => 'UthandoNavigation\Controller\Menu', 'action' => 'all'],
+                    ['controller' => 'UthandoNavigation\Controller\MenuItem', 'action' => 'all']
+                ],
+            ],
+        ],
+        'userResources' => [
+            'UthandoNavigation\Controller\Menu',
+            'UthandoNavigation\Controller\MenuItem',
+            'menu:admin',
+            'menu:guest',
+            'menu:user',
 		],
 	],
     'router' => [
