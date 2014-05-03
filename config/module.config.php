@@ -5,8 +5,10 @@ return [
         'userRoles' => [
             'admin' => [
                 'privileges' => [
-                    ['controller' => 'UthandoNavigation\Controller\Menu', 'action' => 'all'],
-                    ['controller' => 'UthandoNavigation\Controller\MenuItem', 'action' => 'all']
+                    'allow' => [
+                        ['controller' => 'UthandoNavigation\Controller\Menu', 'action' => 'all'],
+                        ['controller' => 'UthandoNavigation\Controller\MenuItem', 'action' => 'all'],
+                    ],
                 ],
             ],
         ],
