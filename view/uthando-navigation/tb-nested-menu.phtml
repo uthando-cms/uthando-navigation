@@ -12,7 +12,7 @@
         <?php if( ! $page->isVisible() || !$this->navigation()->accept($page)) continue; ?>
         <?php $isActive = $page->isActive(true); ?>
         <?php $hasChildren = (($page->rgt - $page->lft) - 1) / 2; ?>
-        
+        <?php \FB::info($page->depth); ?>
         <?php if ($hasChildren): ?>
             <?php $submenu = ($page->depth > 0) ? '-submenu': ''; ?>
             <li class="dropdown<?=$submenu; ?><?php if ($isActive) echo ' active'; ?>">
@@ -42,6 +42,7 @@
         <?php // closures ?>
         
         <?php if ($page->depth > 0): ?>
+            <?php \FB::info($page->depth); ?>
             <?php if ($count == $maxDepth): ?>
                 <?=str_repeat('</li></ul>', $page->depth); ?>
 			</li>

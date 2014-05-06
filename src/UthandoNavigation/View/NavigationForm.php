@@ -43,12 +43,25 @@ class NavigationForm extends AbstractViewHelper
         $select->setValueOptions($menuItemsOptions);
         $select->setEmptyOption('Please select a Position');
         
-        $element = $this->view->plugin('ztbFormElement');
+        $element = $this->view->plugin('formElement');
+        $errors = $this->view->plugin('formElementErrors');
         
         $html = $element($select);
         
         $html = str_replace('%space%', '&nbsp;', $html);
         $html = str_replace('%bull%', '&bull;', $html);
+        
+        $html = '<div class="control-group">
+                     <label class="control-label" for="position">'.$select->getLabel().'</label>
+                     <div class="controls">' .
+                         $html . '
+                         <span class="help-block">' .
+                             $errors($select, [
+                                "class" => "unstyled"
+                            ]) . '
+                         </span>
+                     </div>
+                 </div>';
         
         return $html;
     }

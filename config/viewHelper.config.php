@@ -2,7 +2,7 @@
 
 return [
 	'invokables' => [
-		'AclMenu' 			=> 'UthandoNavigation\View\AclMenu',
-		'NavigationForm'	=> 'UthandoNavigation\View\NavigationForm',
+		'NavigationForm'          => 'UthandoNavigation\View\NavigationForm',
+		'uthandoNavigation'       => 'UthandoNavigation\View\Navigation',
 	],
 ];

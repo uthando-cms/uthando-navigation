@@ -12,12 +12,34 @@ $form->get('menuId')->setValue($this->menuId);
 			<div class="row">
                 <div class="span6">
                     <?php foreach($this->formElements as $element):?>
-                    <?=$this->ztbFormElement($form->get($element));?>
+                    <div class="control-group<?php if ($form->get($element)->getMessages()) echo ' error'; ?>">
+                        <label class="control-label" for="title"><?=$form->get($element)->getLabel();?></label>
+                        <div class="controls">
+                            <?=$this->formelement($form->get($element)); ?>
+                            <span class="help-block">
+                            <?=$this->formElementErrors($form->get($element), [
+                                'class' => 'unstyled'
+                            ]); ?>
+                            </span>
+                        </div>
+                    </div>
                     <?php endforeach;?>
                     <input type="hidden" name="action" value="<?=$this->formAction;?>">
                 </div>
+                <?php $positionSelect = $form->getMenuItemSelect($this->menuId);?>
                 <div class="span6">
-           	        <?=$this->ztbFormElement($form->getMenuItemSelect($this->menuId)); ?>
+                    <div class="control-group<?php if ($form->get('position')->getMessages()) echo ' error'; ?>">
+                        <label class="control-label" for="title"><?=$positionSelect->getLabel();?></label>
+                        <div class="controls">
+                            <?=$this->formElement($positionSelect); ?>
+                            <span class="help-block">
+                            <?=$this->formElementErrors($form->get('position'), [
+                                'class' => 'unstyled'
+                            ]); ?>
+                            </span>
+                        </div>
+                    </div>
+           	        
            	        <div class="control-group">
                         <div class="controls">
                        	    <label class="radio">

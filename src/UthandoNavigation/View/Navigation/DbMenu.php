@@ -1,93 +1,24 @@
 <?php
 
-namespace UthandoNavigation\View;
+namespace UthandoNavigation\View\Navigation;
 
 use Zend\Navigation\Navigation;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface as Router;
-use UthandoCommon\View\AbstractViewHelper;
+use Zend\View\Helper\Navigation\Menu;
 
-class AclMenu extends AbstractViewHelper
-{
-    /**
-     * @var string
-     */
-    protected $ulClass;
-    
-    /**
-     * @var string
-     */
-    protected $menu;
-    
-    /**
-     * @var string
-     */
-    protected $partial;
-    
-    /**
-     * @var bool
-     */
-    protected $useZtb = true;
-    
-    /**
-     * @var string|\Zend\View\Helper\Navigation\Menu
-     */
-    protected $container;
-    
-	public function __invoke($container)
+class DbMenu extends Menu
+{   
+	public function __invoke($container = null)
     {   
-        $this->setUlClass(null);
-        $this->setContainer($container);
+        $container = $this->getPages($container);
         
-    	return $this;
-    }
-    
-    public function __toString()
-    {
-        try {
-            return $this->render();
-        } catch (\Exception $e) {
-            $msg = get_class($e) . ': ' . $e->getMessage();
-            trigger_error($msg, E_USER_ERROR);
-            return '';
-        }
-    }
-    
-    public function render()
-    {   
-        $acl = $this->getServiceLocator()
-            ->getServiceLocator()
-            ->get('UthandoUser\Service\Acl');
-        
-        $container = ($this->getContainer() !== 'model') ? $this->getContainer() : $this->getPages($this->getMenu());
-        
-        $n = ($this->useZtb) ? 'ztbNavigation' : 'Navigation';
-        $m = ($this->useZtb) ? 'ztbMenu' : 'Menu';
-        
-        $nav = $this->view->$n($container);
-         
-        // must set acl before partial.
-        $identity = $this->view->plugin('identity');
-        $role = ($identity()) ? $identity()->getRole() : 'guest';
-        $nav->setAcl($acl)->setRole($role);
-        $partial = $this->getPartial();
-        
-        if ($partial) {
-            if (is_string($partial)) {
-                $partial = [$partial, 'default'];
-            }
-        
-            $nav->$m()->setPartial($partial);
-        }
-        
-        $ulClass = ($this->getUlClass()) ?: $nav->$m()->getUlClass();
-         
-        return $nav->$m()->setUlClass($ulClass)->render();
+        return parent::__invoke($container);
     }
     
     protected function getPages($menu)
     {
-    	/* @var $gateway \Navigation\Service\MenuItem */
+    	/* @var $service \Navigation\Service\MenuItem */
         $service = $this->getServiceLocator()->getServiceLocator()->get('UthandoNavigation\Service\MenuItem');
         
         $pages = $service->getMenuItemsByMenu($menu, true);
@@ -178,60 +109,5 @@ class AclMenu extends AbstractViewHelper
             }
         }
         return $pages;
-    }
-    
-	public function getUlClass()
-    {
-        return $this->ulClass;
-    }
-
-	public function setUlClass($ulClass)
-    {
-        $this->ulClass = $ulClass;
-        return $this;
-    }
-
-	public function getMenu()
-    {
-        return $this->menu;
-    }
-
-	public function setMenu($menu)
-    {
-        $this->menu = $menu;
-        return $this;
-    }
-
-	public function getPartial()
-    {
-        return $this->partial;
-    }
-
-	public function setPartial($partial)
-    {
-        $this->partial = $partial;
-        return $this;
-    }
-
-	public function getUseZtb()
-    {
-        return $this->useZtb;
-    }
-
-	public function setUseZtb($useZtb)
-    {
-        $this->useZtb = $useZtb;
-        return $this;
-    }
-
-	public function getContainer()
-    {
-        return $this->container;
-    }
-
-	public function setContainer($container)
-    {
-        $this->container = $container;
-        return $this;
     }
 }
