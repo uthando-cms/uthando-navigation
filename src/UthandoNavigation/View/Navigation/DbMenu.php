@@ -13,6 +13,21 @@ class DbMenu extends Menu
     {   
         $container = $this->getPages($container);
         
+        // hack as acl and roles get reset to null
+        // on every menu request.
+        if (!$this->hasAcl()) {
+            $acl = $this->getServiceLocator()
+    		  ->getServiceLocator()
+    		  ->get('UthandoUser\Service\Acl');
+            $this->setAcl($acl);
+        }
+        
+        if (!$this->hasRole()) {
+            $identity = $this->view->plugin('identity');
+            $role = ($identity()) ? $identity()->getRole() : 'guest';
+            $this->setRole($role);
+        }
+        
         return parent::__invoke($container);
     }
     

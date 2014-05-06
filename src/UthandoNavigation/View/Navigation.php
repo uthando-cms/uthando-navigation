@@ -23,8 +23,8 @@ class Navigation extends ZendNavigation
     {
     	if (!$this->hasAcl()) {
     		$acl = $this->getServiceLocator()
-    		->getServiceLocator()
-    		->get('UthandoUser\Service\Acl');
+    		  ->getServiceLocator()
+    		  ->get('UthandoUser\Service\Acl');
     		$this->setAcl($acl);
     	}
     
