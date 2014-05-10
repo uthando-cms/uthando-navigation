@@ -42,9 +42,9 @@ class MenuItem extends InputFilter
             ],
             'validators' => [
                 ['name'    => 'StringLength', 'options' => [
-                        'encoding' => 'UTF-8',
-                        'min'      => 0,
-                        'max'      => 255,
+                    'encoding' => 'UTF-8',
+                    'min'      => 0,
+                    'max'      => 255,
                 ]],
             ],
         ]);

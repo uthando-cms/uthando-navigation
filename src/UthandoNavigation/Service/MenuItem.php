@@ -48,7 +48,7 @@ class MenuItem extends AbstractService
 	    return parent::search($post);
 	}
 	
-	public function add(array $post)
+	public function add(array $post, Form $form = null)
 	{
 		$menuItem = $this->getMapper()->getModel();
 		$form  = $this->getForm($menuItem, $post, true, true);

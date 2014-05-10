@@ -12,6 +12,7 @@ $form->get('menuId')->setValue($this->menuId);
 			<div class="row">
                 <div class="span6">
                     <?php foreach($this->formElements as $element):?>
+                    <?php if ($form->get($element)->getAttribute('type') != 'hidden'):?>
                     <div class="control-group<?php if ($form->get($element)->getMessages()) echo ' error'; ?>">
                         <label class="control-label" for="title"><?=$form->get($element)->getLabel();?></label>
                         <div class="controls">
@@ -23,15 +24,18 @@ $form->get('menuId')->setValue($this->menuId);
                             </span>
                         </div>
                     </div>
+                    <?php else: ?>
+                    <?=$this->formelement($form->get($element)); ?>
+                    <?php endif;?>
                     <?php endforeach;?>
                     <input type="hidden" name="action" value="<?=$this->formAction;?>">
                 </div>
-                <?php $positionSelect = $form->getMenuItemSelect($this->menuId);?>
+                
                 <div class="span6">
                     <div class="control-group<?php if ($form->get('position')->getMessages()) echo ' error'; ?>">
-                        <label class="control-label" for="title"><?=$positionSelect->getLabel();?></label>
+                        <label class="control-label" for="title"><?=$form->get('position')->getLabel();?></label>
                         <div class="controls">
-                            <?=$this->formElement($positionSelect); ?>
+                            <?=$this->formElement($this->form->get('position')->setMenuId($this->menuId)); ?>
                             <span class="help-block">
                             <?=$this->formElementErrors($form->get('position'), [
                                 'class' => 'unstyled'

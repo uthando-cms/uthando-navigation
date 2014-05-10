@@ -6,6 +6,9 @@ return [
     'UthandoNavigation\Controller\MenuController'               => __DIR__ . '/src/UthandoNavigation/Controller/MenuController.php',
     'UthandoNavigation\Controller\MenuItemController'           => __DIR__ . '/src/UthandoNavigation/Controller/MenuItemController.php',
     
+    'UthandoNavigation\Form\Element\MenuItemList'               => __DIR__ . '/src/UthandoNavigation/Form/Element/MenuItemList.php',
+    'UthandoNavigation\Form\Element\ResourceList'               => __DIR__ . '/src/UthandoNavigation/Form/Element/ResourceList.php',
+    'UthandoNavigation\Form\Element\RouteList'                  => __DIR__ . '/src/UthandoNavigation/Form/Element/RouteList.php',
     'UthandoNavigation\Form\Menu'                               => __DIR__ . '/src/UthandoNavigation/Form/Menu.php',
     'UthandoNavigation\Form\MenuItem'                           => __DIR__ . '/src/UthandoNavigation/Form/MenuItem.php',
     
@@ -21,7 +24,6 @@ return [
     'UthandoNavigation\Model\Menu'                              => __DIR__ . '/src/UthandoNavigation/Model/Menu.php',
     'UthandoNavigation\Model\MenuItem'                          => __DIR__ . '/src/UthandoNavigation/Model/MenuItem.php',
     
-    'UthandoNavigation\Service\Form\MenuItemFactory'            => __DIR__ . '/src/UthandoNavigation/Service/Form/MenuItemFactory.php',
     'UthandoNavigation\Service\Menu'                            => __DIR__ . '/src/UthandoNavigation/Service/Menu.php',
     'UthandoNavigation\Service\MenuItem'                        => __DIR__ . '/src/UthandoNavigation/Service/MenuItem.php',
     
