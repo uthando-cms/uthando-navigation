@@ -5,21 +5,21 @@ $routeArray = ['action' => $this->formAction];
 if (isset($this->primaryKey)) $routeArray['id'] = $this->primaryKey;
 $form->get('menuId')->setValue($this->menuId);
 ?>
-<div>
-	<form class="form form-horizontal" method="post" action="<?=$this->url($this->postRoute, array_merge($routeParams, $routeArray)) ?>">
+<div class="row">
+	<form class="col-sm-12 form-horizontal" method="post" action="<?=$this->url($this->postRoute, array_merge($routeParams, $routeArray)) ?>">
 		<fieldset>
 			<legend><?=ucwords($this->formAction); ?> <?=$this->formName;?> Form:</legend>
 			<div class="row">
-                <div class="span6">
+                <div class="col-sm-6">
                     <?php foreach($this->formElements as $element):?>
                     <?php if ($form->get($element)->getAttribute('type') != 'hidden'):?>
-                    <div class="control-group<?php if ($form->get($element)->getMessages()) echo ' error'; ?>">
-                        <label class="control-label" for="title"><?=$form->get($element)->getLabel();?></label>
-                        <div class="controls">
-                            <?=$this->formelement($form->get($element)); ?>
+                    <div class="form-group<?php if ($form->get($element)->getMessages()) echo ' has-error'; ?>">
+                        <label class="col-sm-4 control-label" for="title"><?=$form->get($element)->getLabel();?></label>
+                        <div class="col-sm-8">
+                            <?=$this->formelement($form->get($element)->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                             <?=$this->formElementErrors($form->get($element), [
-                                'class' => 'unstyled'
+                                'class' => 'list-unstyled'
                             ]); ?>
                             </span>
                         </div>
@@ -31,22 +31,17 @@ $form->get('menuId')->setValue($this->menuId);
                     <input type="hidden" name="action" value="<?=$this->formAction;?>">
                 </div>
                 
-                <div class="span6">
-                    <div class="control-group<?php if ($form->get('position')->getMessages()) echo ' error'; ?>">
-                        <label class="control-label" for="title"><?=$form->get('position')->getLabel();?></label>
-                        <div class="controls">
-                            <?=$this->formElement($this->form->get('position')->setMenuId($this->menuId)); ?>
+                <div class="col-sm-6">
+                    <div class="form-group<?php if ($form->get('position')->getMessages()) echo ' has-error'; ?>">
+                        <label class="col-sm-4 control-label" for="title"><?=$form->get('position')->getLabel();?></label>
+                        <div class="col-sm-8">
+                            <?=$this->formElement($this->form->get('position')->setMenuId($this->menuId)->setAttribute('class', 'form-control')); ?>
                             <span class="help-block">
                             <?=$this->formElementErrors($form->get('position'), [
-                                'class' => 'unstyled'
+                                'class' => 'list-unstyled'
                             ]); ?>
                             </span>
-                        </div>
-                    </div>
-           	        
-           	        <div class="control-group">
-                        <div class="controls">
-                       	    <label class="radio">
+                            <label class="radio">
                                 <input type="radio" name="menuInsertType" id="menuInsertType1" value="insert" checked>
                                 insert after this page.
                             </label>
@@ -59,8 +54,8 @@ $form->get('menuId')->setValue($this->menuId);
                 </div>
             </div>
             
-            <div class="control-group">
-            <div class="controls">
+            <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary" data-loading-text="Please wait...">
                 	Submit
                 </button>

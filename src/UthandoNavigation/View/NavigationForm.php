@@ -42,6 +42,7 @@ class NavigationForm extends AbstractViewHelper
         $select->setLabel('Location In Menu:');
         $select->setValueOptions($menuItemsOptions);
         $select->setEmptyOption('Please select a Position');
+        $select->setAttribute('class', 'form-control');
         
         $element = $this->view->plugin('formElement');
         $errors = $this->view->plugin('formElementErrors');
@@ -51,9 +52,9 @@ class NavigationForm extends AbstractViewHelper
         $html = str_replace('%space%', '&nbsp;', $html);
         $html = str_replace('%bull%', '&bull;', $html);
         
-        $html = '<div class="control-group">
-                     <label class="control-label" for="position">'.$select->getLabel().'</label>
-                     <div class="controls">' .
+        $html = '<div class="form-group">
+                     <label class="col-sm-4 control-label" for="position">'.$select->getLabel().'</label>
+                     <div class="col-sm-8">' .
                          $html . '
                          <span class="help-block">' .
                              $errors($select, [
