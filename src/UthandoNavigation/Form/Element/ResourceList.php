@@ -17,7 +17,8 @@ class ResourceList extends Select implements ServiceLocatorAwareInterface
             ->getServiceLocator()
             ->get('config');
         
-        $resources = $config['userAcl']['userResources'];
+        $resources = preg_grep("/^menu:/", $config['userAcl']['userResources']);
+        
         $this->setValueOptions($this->getResources($resources));
     }
     
