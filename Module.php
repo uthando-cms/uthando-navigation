@@ -2,9 +2,20 @@
 
 namespace UthandoNavigation;
 
+use UthandoNavigation\Event\ServiceListener;
+use Zend\Mvc\MvcEvent;
+
 class Module
 {
-	public function getAutoloaderConfig()
+    public function onBootStrap(MvcEvent $e)
+    {
+        $app = $e->getApplication();
+        $eventManager = $app->getEventManager();
+
+        $eventManager->attachAggregate(new ServiceListener());
+    }
+
+    public function getAutoloaderConfig()
     {
         return [
             'Zend\Loader\ClassMapAutoloader' => [
@@ -62,5 +73,4 @@ class Module
 			],
     	];
     }
-    
 }

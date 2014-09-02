@@ -41,13 +41,20 @@ $form->get('menuId')->setValue($this->menuId);
                                 'class' => 'list-unstyled'
                             ]); ?>
                             </span>
+                            <?php if ('edit' === $this->formAction): ?>
                             <label class="radio">
-                                <input type="radio" name="menuInsertType" id="menuInsertType1" value="insert" checked>
+                                <input type="radio" name="menuInsertType" value="noInsert" checked >
+                                no change.
+                            </label>
+                            <?php endif; ?>
+                            <label class="radio">
+                                <input type="radio" name="menuInsertType" value="insert" <?=('add'
+    === $this->formAction) ? 'checked' : null; ?>>
                                 insert after this page.
                             </label>
                             <label class="radio">
-                                <input type="radio" name="menuInsertType" id="menuInsertType2" value="insertSub">
-                                insert as a subpage of this page.
+                                <input type="radio" name="menuInsertType" value="insertSub">
+                                insert as a sub page of this page.
                             </label>
                         </div>
                     </div>

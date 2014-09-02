@@ -9,7 +9,7 @@ class MenuItemList extends Select implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
     
-    protected $emptyOption = '---Please select a menu item---';
+    //protected $emptyOption = '---Please select a menu item---';
     
     /**
      * @var int
