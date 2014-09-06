@@ -4,8 +4,10 @@ namespace UthandoNavigation\Model;
 
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
+use UthandoCommon\Model\NestedSetInterface;
+use UthandoCommon\Model\NestedSet;
 
-class MenuItem implements ModelInterface
+class MenuItem extends NestedSet implements ModelInterface, NestedSetInterface
 {   
     use Model;
     
@@ -48,207 +50,148 @@ class MenuItem implements ModelInterface
 	 * @var int
 	 */
 	protected $visible;
-	
-	/**
-	 * @var int
-	 */
-	protected $lft;
-	
-	/**
-	 * @var int
-	 */
-	protected $rgt;
-	
-	/**
-	 * @var int
-	 */
-	protected $depth;
-	
-	/**
-	 * @return the $menuItemId
-	 */
-	public function getMenuItemId()
+
+    /**
+     * @return int
+     */
+    public function getMenuItemId()
 	{
 		return $this->menuItemId;
 	}
 
-	/**
-	 * @param number $menuItemId
-	 */
-	public function setMenuItemId($menuItemId)
+    /**
+     * @param $menuItemId
+     * @return $this
+     */
+    public function setMenuItemId($menuItemId)
 	{
 		$this->menuItemId = $menuItemId;
 		return $this;
 	}
 
-	/**
-	 * @return the $menuId
-	 */
-	public function getMenuId()
+    /**
+     * @return int
+     */
+    public function getMenuId()
 	{
 		return $this->menuId;
 	}
 
-	/**
-	 * @param number $menuId
-	 */
-	public function setMenuId($menuId)
+    /**
+     * @param $menuId
+     * @return $this
+     */
+    public function setMenuId($menuId)
 	{
 		$this->menuId = $menuId;
 		return $this;
 	}
 
-	/**
-	 * @return the $label
-	 */
-	public function getLabel()
+    /**
+     * @return string
+     */
+    public function getLabel()
 	{
 		return $this->label;
 	}
 
-	/**
-	 * @param string $label
-	 */
-	public function setLabel($label)
+    /**
+     * @param $label
+     * @return $this
+     */
+    public function setLabel($label)
 	{
 		$this->label = $label;
 		return $this;
 	}
 
-	/**
-	 * @return the $params
-	 */
-	public function getParams()
+    /**
+     * @return string
+     */
+    public function getParams()
 	{
 		return $this->params;
 	}
 
-	/**
-	 * @param string $params
-	 */
-	public function setParams($params)
+    /**
+     * @param $params
+     * @return $this
+     */
+    public function setParams($params)
 	{
 		$this->params = $params;
 		return $this;
 	}
 
-	/**
-	 * @return the $route
-	 */
-	public function getRoute()
+    /**
+     * @return string
+     */
+    public function getRoute()
 	{
 		return $this->route;
 	}
 
-	/**
-	 * @param string $route
-	 */
-	public function setRoute($route)
+    /**
+     * @param $route
+     * @return $this
+     */
+    public function setRoute($route)
 	{
 		$this->route = $route;
 		return $this;
 	}
 
-	/**
-	 * @return the $uri
-	 */
-	public function getUri()
+    /**
+     * @return string
+     */
+    public function getUri()
 	{
 		return $this->uri;
 	}
 
-	/**
-	 * @param string $uri
-	 */
-	public function setUri($uri)
+    /**
+     * @param $uri
+     * @return $this
+     */
+    public function setUri($uri)
 	{
 		$this->uri = $uri;
 		return $this;
 	}
 
-	/**
-	 * @return the $resource
-	 */
-	public function getResource()
+    /**
+     * @return string
+     */
+    public function getResource()
 	{
 		return $this->resource;
 	}
 
-	/**
-	 * @param string $resource
-	 */
-	public function setResource($resource)
+    /**
+     * @param $resource
+     * @return $this
+     */
+    public function setResource($resource)
 	{
 		$this->resource = $resource;
 		return $this;
 	}
 
-	/**
-	 * @return the $visible
-	 */
-	public function getVisible()
+    /**
+     * @return int
+     */
+    public function getVisible()
 	{
 		return $this->visible;
 	}
 
-	/**
-	 * @param number $visible
-	 */
-	public function setVisible($visible)
+    /**
+     * @param $visible
+     * @return $this
+     */
+    public function setVisible($visible)
 	{
 		$this->visible = $visible;
-		return $this;
-	}
-
-	/**
-	 * @return the $lft
-	 */
-	public function getLft()
-	{
-		return $this->lft;
-	}
-
-	/**
-	 * @param number $lft
-	 */
-	public function setLft($lft)
-	{
-		$this->lft = $lft;
-		return $this;
-	}
-
-	/**
-	 * @return the $rgt
-	 */
-	public function getRgt()
-	{
-		return $this->rgt;
-	}
-
-	/**
-	 * @param number $rgt
-	 */
-	public function setRgt($rgt)
-	{
-		$this->rgt = $rgt;
-		return $this;
-	}
-	
-	/**
-	 * @param number $depth
-	 */
-	public function getDepth()
-	{
-		return $this->depth;
-	}
-	
-	/**
-	 * @param number $depth
-	 * @return \UthandoNavigation\Model\MenuItem
-	 */
-	public function setDepth($depth)
-	{
-		$this->depth = $depth;
 		return $this;
 	}
 
