@@ -5,7 +5,7 @@ use Zend\InputFilter\InputFilter;
 
 class Menu extends InputFilter
 {
-	public function __construct()
+	public function init()
 	{
 		$this->add([
             'name'       => 'menu',

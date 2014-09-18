@@ -5,7 +5,7 @@ use Zend\InputFilter\InputFilter;
 
 class MenuItem extends InputFilter
 {
-	public function __construct()
+	public function init()
 	{
 		$this->add([
             'name'       => 'label',

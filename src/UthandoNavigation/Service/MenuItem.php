@@ -1,16 +1,14 @@
 <?php
 namespace UthandoNavigation\Service;
 
-use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Service\AbstractMapperService;
 use UthandoCommon\Model\ModelInterface;
 use Zend\Form\Form;
 use Exception;
 
-class MenuItem extends AbstractService
+class MenuItem extends AbstractMapperService
 {
-	protected $mapperClass = 'UthandoNavigation\Mapper\MenuItem';
-	protected $form = 'UthandoNavigation\Form\MenuItem';
-	protected $inputFilter = 'UthandoNavigation\InputFilter\MenuItem';
+    protected $serviceAlias = 'UthandoNavigationMenuItem';
 	
 	public function getMenuItemByMenuIdAndLabel($menuId, $label)
 	{

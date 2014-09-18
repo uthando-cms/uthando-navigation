@@ -2,13 +2,11 @@
 
 namespace UthandoNavigation\Service;
 
-use UthandoCommon\Service\AbstractService;
+use UthandoCommon\Service\AbstractMapperService;
 
-class Menu extends AbstractService
+class Menu extends AbstractMapperService
 {	
-	protected $mapperClass = 'UthandoNavigation\Mapper\Menu';
-	protected $form = 'UthandoNavigation\Form\Menu';
-	protected $inputFilter = 'UthandoNavigation\InputFilter\Menu';
+	protected $serviceAlias = 'UthandoNavigationMenu';
 	
 	public function getMenu($menuName)
 	{
