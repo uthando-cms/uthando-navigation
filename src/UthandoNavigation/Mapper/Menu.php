@@ -1,19 +1,22 @@
 <?php
 namespace UthandoNavigation\Mapper;
 
-use UthandoCommon\Mapper\AbstractMapper;
+use UthandoCommon\Mapper\AbstractDbMapper;
 
-class Menu extends AbstractMapper
+class Menu extends AbstractDbMapper
 {
 	protected $table = 'menu';
 	protected $primary = 'menuId';
-	protected $model = 'UthandoNavigation\Model\Menu';
-	protected $hydrator = 'UthandoNavigation\Hydrator\Menu';
-	
+
+    /**
+     * @param int $menu
+     * @return null|\UthandoNavigation\Model\Menu
+     */
 	public function getMenu($menu)
 	{
-	    $rowset = $this->getSelect()->where(['menu' => $menu]);
-	    $row = $rowset->current();
+	    $select = $this->getSelect()->where(['menu' => $menu]);
+        $rowSet = $this->fetchResult($select);
+	    $row = $rowSet->current();
 	    return $row;
 	}
 }

@@ -8,10 +8,18 @@ class MenuItem extends AbstractNestedSet
 {
 	protected $table = 'menuItem';
 	protected $primary = 'menuItemId';
-	protected $model = 'UthandoNavigation\Model\MenuItem';
-	protected $hydrator = 'UthandoNavigation\Hydrator\MenuItem';
+
+    /**
+     * @var int
+     */
 	protected $menuId;
-	
+
+    /**
+     * @param array $search
+     * @param string $sort
+     * @param Select $select
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
 	public function search(array $search, $sort, Select $select = null)
 	{
 	    $select = $this->getSelect();
@@ -19,7 +27,11 @@ class MenuItem extends AbstractNestedSet
 	    
 	    return parent::search($search, $sort, $select);
 	}
-    
+
+    /**
+     * @param int $id
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function getMenuItemsByMenuId($id)
     {   
         $select = $this->getFullTree();
@@ -28,7 +40,11 @@ class MenuItem extends AbstractNestedSet
     	
     	return $this->fetchResult($select);
     }
-    
+
+    /**
+     * @param int $menu
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
     public function getMenuItemsByMenu($menu)
     {
         $select = $this->getFullTree();
@@ -41,7 +57,12 @@ class MenuItem extends AbstractNestedSet
         
         return $this->fetchResult($select);
     }
-    
+
+    /**
+     * @param int $menuId
+     * @param string $label
+     * @return \UthandoNavigation\Model\MenuItem|null
+     */
     public function getMenuItemByMenuIdAndLabel($menuId, $label)
     {
     	$select = $this->getSelect()->where(['menuId' => $menuId, 'label' => $label]);
@@ -49,7 +70,11 @@ class MenuItem extends AbstractNestedSet
     	$row = $rowSet->current();
     	return $row;
     }
-    
+
+    /**
+     * @param int $id
+     * @return \Zend\Db\Adapter\Driver\ResultInterface
+     */
     public function deleteMenuItemsByMenuId($id)
     {
     	$sql = $this->getSql();
@@ -63,15 +88,16 @@ class MenuItem extends AbstractNestedSet
     }
     
 	/**
-     * @return the $menuId
+     * @return int
      */
     public function getMenuId ()
     {
         return $this->menuId;
     }
 
-	/**
-     * @param field_type $menuId
+    /**
+     * @param int $menuId
+     * @return $this
      */
     public function setMenuId ($menuId)
     {
