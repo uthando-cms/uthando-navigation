@@ -13,8 +13,7 @@
 </div>
 
 
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
+<script>
 	$('#table-menu').dataGrid({
     	url : 'menu/list',
     	query: { sort : 'name' },
@@ -22,5 +21,4 @@ $(document).ready(function(){
     	paging : 'links',
     	columnSort: true
 	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+</script>
