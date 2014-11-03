@@ -4,9 +4,10 @@
 	'form' 			=> $this->form,
 	'formAction' 	=> 'edit',
 	'formName'		=> 'Menu',
-    'primaryKey'    => $this->model->getMenuId(),
-	'postRoute'		=> 'admin/menu/edit',
-	'cancelRoute'	=> 'admin/menu',
+    'postUrl'		=> $this->url('admin/menu/edit', [
+        'id'        => $this->model->getMenuId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/menu'),
 	'formElements'	=> [
 		'menuId', 'menu',
 	],

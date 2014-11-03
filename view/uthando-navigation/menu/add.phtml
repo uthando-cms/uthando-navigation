@@ -4,8 +4,10 @@
 	'form' 			=> $this->form,
 	'formAction' 	=> 'add',
 	'formName'		=> 'Menu',
-	'postRoute'		=> 'admin/menu/edit',
-	'cancelRoute'	=> 'admin/menu',
+    'postUrl'		=> $this->url('admin/menu/edit', [
+        'action'    => 'add',
+    ]),
+    'cancelUrl'     => $this->url('admin/menu'),
 	'formElements'	=> [
 		'menu',
 	],
