@@ -33,14 +33,14 @@ class DbMenu extends Menu
     
     protected function getPages($menu)
     {
-    	/* @var $service \Navigation\Service\MenuItem */
+    	/* @var $service \UthandoNavigation\Service\MenuItem */
         $service = $this->getServiceLocator()->getServiceLocator()->get('UthandoNavigation\Service\MenuItem');
         
         $pages = $service->getMenuItemsByMenu($menu, true);
         
         $pageArray = [];
         
-        /* @var $page \Navigation\Model\MenuItem */
+        /* @var $page \UthandoNavigation\Model\MenuItem */
         foreach ($pages as $page) {
             $p = $pages->getHydrator()->extract($page);
             $p['params'] = parse_ini_string($p['params']);

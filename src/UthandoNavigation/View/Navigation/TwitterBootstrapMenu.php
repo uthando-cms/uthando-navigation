@@ -20,6 +20,29 @@ class TwitterBootstrapMenu extends ZendMenu
     protected $ulClass = 'nav';
 
     /**
+     * @var string
+     */
+    protected $ulId;
+
+    /**
+     * @return string
+     */
+    public function getUlId()
+    {
+        return $this->ulId;
+    }
+
+    /**
+     * @param $ulId
+     * @return $this
+     */
+    public function setUlId($ulId)
+    {
+        $this->ulId = $ulId;
+        return $this;
+    }
+
+    /**
      * Renders the deepest active menu within [$minDepth, $maxDepth], (called
      * from {@link renderMenu()})
      *
@@ -60,7 +83,8 @@ class TwitterBootstrapMenu extends ZendMenu
         }
 
         $ulClass = $ulClass ? ' class="' . $ulClass . '"' : '';
-        $html = $indent . '<ul' . $ulClass . '>' . self::EOL;
+        $ulId = ($this->getUlId()) ? ' id="' . $this->getUlId() . '"' : '';
+        $html = $indent . '<ul' . $ulId . $ulClass . '>' . self::EOL;
 
         foreach ($active['page'] as $subPage) {
             if (!$this->accept($subPage)) {
@@ -176,7 +200,14 @@ class TwitterBootstrapMenu extends ZendMenu
                 } else {
                     $ulClass = '';
                 }
-                $html .= $myIndent . '<ul' . $ulClass . '>' . self::EOL;
+
+                if ($this->getUlId() && $depth == 0) {
+                    $ulId = ' id="' . $this->getUlId() . '"';
+                } else {
+                    $ulId = '';
+                }
+
+                $html .= $myIndent . '<ul' . $ulId . $ulClass . '>' . self::EOL;
             } elseif ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {

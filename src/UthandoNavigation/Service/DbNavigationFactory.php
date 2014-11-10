@@ -13,14 +13,14 @@ class DbNavigationFactory extends AbstractNavigationFactory
 	
 	protected function getPages(ServiceLocatorInterface $serviceLocator)
 	{
-		/* @var $servie \Navigation\Service\MenuItem */
+		/* @var $service \UthandoNavigation\Service\MenuItem */
 		$service = $serviceLocator->get('UthandoNavigation\Service\MenuItem');
 	
 		$pages = $service->getAllMenusAndMenuItems();
 	
 		$pageArray = [];
 	
-		/* @var $page \Navigation\Model\MenuItem */
+		/* @var $page \UthandoNavigation\Model\MenuItem */
 		foreach ($pages as $page) {
 			$p = $pages->getHydrator()->extract($page);
 			$p['params'] = parse_ini_string($p['params']);
