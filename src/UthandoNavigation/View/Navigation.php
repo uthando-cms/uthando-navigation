@@ -15,8 +15,9 @@ class Navigation extends ZendNavigation
      * @var array
      */
     protected $defaultPluginManagerHelpers = [
-        'uthandoDbMenu' => 'UthandoNavigation\View\Navigation\DbMenu',
-        'uthandoTbMenu' => 'UthandoNavigation\View\Navigation\TwitterBootstrapMenu',
+        'uthandoDbMenu'     => 'UthandoNavigation\View\Navigation\DbMenu',
+        'uthandoTbDbMenu'   => 'UthandoNavigation\View\Navigation\TwitterBootstrapDbMenu',
+        'uthandoTbMenu'     => 'UthandoNavigation\View\Navigation\TwitterBootstrapMenu',
     ];
     
     public function getAcl()
