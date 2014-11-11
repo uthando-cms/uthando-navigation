@@ -22,6 +22,11 @@ class TwitterBootstrapMenu extends ZendMenu
     /**
      * @var string
      */
+    protected $subUlClass = 'dropdown-menu';
+
+    /**
+     * @var string
+     */
     protected $ulId;
 
     /**
@@ -39,6 +44,24 @@ class TwitterBootstrapMenu extends ZendMenu
     public function setUlId($ulId)
     {
         $this->ulId = $ulId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubUlClass()
+    {
+        return $this->subUlClass;
+    }
+
+    /**
+     * @param $subUlClass
+     * @return $this
+     */
+    public function setSubUlClass($subUlClass)
+    {
+        $this->subUlClass = $subUlClass;
         return $this;
     }
 
@@ -196,7 +219,7 @@ class TwitterBootstrapMenu extends ZendMenu
                 if ($ulClass && $depth ==  0) {
                     $ulClass = ' class="' . $ulClass . '"';
                 } elseif ($page->getParent()) {
-                    $ulClass = ' class="dropdown-menu"';
+                    $ulClass = ' class="' . $this->getSubUlClass() . '"';
                 } else {
                     $ulClass = '';
                 }
