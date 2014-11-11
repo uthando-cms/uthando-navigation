@@ -43,11 +43,12 @@ trait DbMenuTrait
 
         /* @var $page \UthandoNavigation\Model\MenuItem */
         foreach ($pages as $page) {
-            $p = $pages->getHydrator()->extract($page);
+            $p = $page->getArrayCopy();
             $p['params'] = parse_ini_string($p['params']);
 
             if ($p['route'] == '0') {
                 unset($p['route']);
+                $p['uri'] = '#';
             } else {
                 unset($p['uri']);
             }

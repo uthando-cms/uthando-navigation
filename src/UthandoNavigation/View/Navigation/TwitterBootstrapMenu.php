@@ -30,6 +30,11 @@ class TwitterBootstrapMenu extends ZendMenu
     protected $ulId;
 
     /**
+     * @var bool
+     */
+    protected $useCaret = true;
+
+    /**
      * @return string
      */
     public function getUlId()
@@ -62,6 +67,24 @@ class TwitterBootstrapMenu extends ZendMenu
     public function setSubUlClass($subUlClass)
     {
         $this->subUlClass = $subUlClass;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUseCaret()
+    {
+        return $this->useCaret;
+    }
+
+    /**
+     * @param $useCaret
+     * @return $this
+     */
+    public function setUseCaret($useCaret)
+    {
+        $this->useCaret = $useCaret;
         return $this;
     }
 
@@ -107,7 +130,7 @@ class TwitterBootstrapMenu extends ZendMenu
 
         $ulClass = $ulClass ? ' class="' . $ulClass . '"' : '';
         $ulId = ($this->getUlId()) ? ' id="' . $this->getUlId() . '"' : '';
-        $html = $indent . '<ul' . $ulId . $ulClass . '>' . self::EOL;
+        $html = $indent . '<ul' . $ulId . $ulClass . '>' . PHP_EOL;
 
         foreach ($active['page'] as $subPage) {
             if (!$this->accept($subPage)) {
@@ -127,9 +150,9 @@ class TwitterBootstrapMenu extends ZendMenu
             }
             $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
 
-            $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
-            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addClassToListItem) . self::EOL;
-            $html .= $indent . '    </li>' . self::EOL;
+            $html .= $indent . '    <li' . $liClass . '>' . PHP_EOL;
+            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addClassToListItem) . PHP_EOL;
+            $html .= $indent . '    </li>' . PHP_EOL;
         }
 
         $html .= $indent . '</ul>';
@@ -230,19 +253,19 @@ class TwitterBootstrapMenu extends ZendMenu
                     $ulId = '';
                 }
 
-                $html .= $myIndent . '<ul' . $ulId . $ulClass . '>' . self::EOL;
+                $html .= $myIndent . '<ul' . $ulId . $ulClass . '>' . PHP_EOL;
             } elseif ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {
                     $ind = $indent . str_repeat('        ', $i);
-                    $html .= $ind . '    </li>' . self::EOL;
-                    $html .= $ind . '</ul>' . self::EOL;
+                    $html .= $ind . '    </li>' . PHP_EOL;
+                    $html .= $ind . '</ul>' . PHP_EOL;
                 }
                 // close previous li tag
-                $html .= $myIndent . '    </li>' . self::EOL;
+                $html .= $myIndent . '    </li>' . PHP_EOL;
             } else {
                 // close previous li tag
-                $html .= $myIndent . '    </li>' . self::EOL;
+                $html .= $myIndent . '    </li>' . PHP_EOL;
             }
 
             // render li tag and page
@@ -266,8 +289,8 @@ class TwitterBootstrapMenu extends ZendMenu
             }
             $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
 
-            $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
-                . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addClassToListItem) . self::EOL;
+            $html .= $myIndent . '    <li' . $liClass . '>' . PHP_EOL
+                . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addClassToListItem) . PHP_EOL;
 
             // store as previous depth for next iteration
             $prevDepth = $depth;
@@ -277,10 +300,10 @@ class TwitterBootstrapMenu extends ZendMenu
             // done iterating container; close open ul/li tags
             for ($i = $prevDepth+1; $i > 0; $i--) {
                 $myIndent = $indent . str_repeat('        ', $i-1);
-                $html .= $myIndent . '    </li>' . self::EOL
-                    . $myIndent . '</ul>' . self::EOL;
+                $html .= $myIndent . '    </li>' . PHP_EOL
+                    . $myIndent . '</ul>' . PHP_EOL;
             }
-            $html = rtrim($html, self::EOL);
+            $html = rtrim($html, PHP_EOL);
         }
 
         return $html;
@@ -331,8 +354,8 @@ class TwitterBootstrapMenu extends ZendMenu
             $attribs['data-toggle'] = 'dropdown';
             $class[] = 'dropdown-toggle';
             
-            if (!$page->isSubmenu) {
-            	$extended = '<b class="caret"></b>';
+            if (!$page->isSubmenu && $this->getUseCaret()) {
+            	$extended = '<span class="caret"></span>';
             }
         }
         if (count($class) > 0) {
