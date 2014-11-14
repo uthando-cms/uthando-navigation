@@ -28,7 +28,7 @@ class Navigation extends ZendNavigation
     		  ->get('UthandoUser\Service\Acl');
     		$this->setAcl($acl);
     	}
-    
+
     	return parent::getAcl();
     }
     

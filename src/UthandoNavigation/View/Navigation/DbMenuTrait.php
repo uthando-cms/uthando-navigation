@@ -2,6 +2,7 @@
 
 namespace UthandoNavigation\View\Navigation;
 
+use Zend\Config\Reader\Ini;
 use Zend\Navigation\Navigation;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface as Router;
@@ -37,6 +38,8 @@ trait DbMenuTrait
             ->getServiceLocator()
             ->get('UthandoNavigation\Service\MenuItem');
 
+        $config = new Ini();
+
         $pages = $service->getMenuItemsByMenu($menu, true);
 
         $pageArray = [];
@@ -44,7 +47,16 @@ trait DbMenuTrait
         /* @var $page \UthandoNavigation\Model\MenuItem */
         foreach ($pages as $page) {
             $p = $page->getArrayCopy();
-            $p['params'] = parse_ini_string($p['params']);
+            $params = $config->fromString($p['params']);
+
+            // need to initialise params array else error occurs
+            $p['params'] = [];
+
+            // params contain route params and other element params like:
+            // id, class etc.
+            foreach ($params as $key => $value) {
+                $p[$key] = $value;
+            }
 
             if ($p['route'] == '0') {
                 unset($p['route']);
