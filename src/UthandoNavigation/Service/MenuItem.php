@@ -78,13 +78,13 @@ class MenuItem extends AbstractMapperService
 		if ($menuItem) {
 			// if page position has changed then we need to delete it
 			// and reinsert it in the new position else just update it.
-			if ($post['position'] && $post['menuInsertType'] != 'noInsert') {
+			if ('noInsert' !== $post['menuInsertType']) {
 				// TODO find children and move them as well.
-				$del = $this->delete($model->getMenuItemId());
-	
-				if ($del) {
-					$result = $this->add($post);
-				}
+                $position = (int) $post['position'];
+                $insertType = (string) $post['menuInsertType'];
+                $data = $data = $this->getMapper()
+                    ->extract($form->getData());
+                $result = $this->getMapper()->move($data, $position, $insertType);
 			} else {
 				$data = $this->getMapper()->extract($form->getData());
 				
