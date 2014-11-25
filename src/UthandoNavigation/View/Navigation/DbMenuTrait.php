@@ -2,6 +2,7 @@
 
 namespace UthandoNavigation\View\Navigation;
 
+use UthandoCommon\Stdlib\ArrayUtils;
 use Zend\Config\Reader\Ini;
 use Zend\Navigation\Navigation;
 use Zend\Mvc\Router\RouteMatch;
@@ -9,8 +10,15 @@ use Zend\Mvc\Router\RouteStackInterface as Router;
 
 trait DbMenuTrait
 {
-    public function __invoke($container = null)
+    /**
+     * @var bool
+     */
+    protected $multiArray;
+
+    public function __invoke($container = null, $useMultiArray = true)
     {
+        $this->multiArray = $useMultiArray;
+
         $container = $this->getPages($container);
 
         // hack as acl and roles get reset to null
@@ -68,46 +76,11 @@ trait DbMenuTrait
             $pageArray[] = $p;
         }
 
-        return new Navigation($this->preparePages($this->listToMultiArray($pageArray)));
-    }
-
-    /*public function traverseArray(&$array, $keys)
-    {
-        foreach ($array as $key => &$value) {
-            if (is_array($value)) {
-                self::traverseArray($value, $keys);
-            } else {
-                if (in_array($key, $keys) || '' == $value){
-                    unset($array[$key]);
-                }
-            }
-        }
-        return $array;
-    }*/
-
-    public function listToMultiArray($arrs)
-    {
-        $nested = [];
-        $depths = [];
-
-        foreach($arrs as $key => $arr) {
-
-            if( $arr['depth'] == 0 ) {
-                $nested[$key] = $arr;
-            } else {
-                $parent =& $nested;
-
-                for ($i = 1; $i <= ($arr['depth']); $i++) {
-                    $parent =& $parent[$depths[$i]];
-                }
-
-                $parent['pages'][$key] = $arr;
-            }
-
-            $depths[$arr['depth'] + 1] = $key;
+        if ($this->isMultiArray()) {
+            $pageArray = ArrayUtils::listToMultiArray($pageArray);
         }
 
-        return $nested;
+        return new Navigation($this->preparePages($pageArray));
     }
 
     protected function preparePages($pages)
@@ -128,6 +101,7 @@ trait DbMenuTrait
                 if (!isset($page['routeMatch']) && $routeMatch) {
                     $page['routeMatch'] = $routeMatch;
                 }
+
                 if (!isset($page['router'])) {
                     $page['router'] = $router;
                 }
@@ -138,5 +112,13 @@ trait DbMenuTrait
             }
         }
         return $pages;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isMultiArray()
+    {
+        return $this->multiArray;
     }
 } 
