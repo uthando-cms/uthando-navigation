@@ -74,6 +74,7 @@ class MenuItem extends AbstractMapperService
 		}
 		
 		$menuItem = $this->getById($model->getMenuItemId());
+        $this->removeCacheItem($model->getMenuItemId());
 	
 		if ($menuItem) {
 			// if page position has changed then we need to delete it

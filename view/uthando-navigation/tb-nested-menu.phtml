@@ -41,18 +41,19 @@
         <?php // closures ?>
         
         <?php if ($page->depth > 0): ?>
-
             <?php if ($count == $maxDepth): ?>
-                <?=str_repeat('</li></ul>', $page->depth); ?>
-			</li>
+                <?=str_repeat('</li></ul>', $page->depth); ?></li>
             <?php elseif ($arrayCopy[$count + 1]['depth'] < $page->depth): ?>
-                <?=str_repeat('</li></ul>', ($page->depth - $arrayCopy[$count + 1]['depth'])); ?>
-			</li>
+                <?=str_repeat('</li></ul>', ($page->depth - $arrayCopy[$count + 1]['depth'])); ?></li>
 			<?php else: ?>
-            </li>
+                <?php if (!$hasChildren): ?>
+                    </li>
+                <?php endif; ?>
             <?php endif; ?>
         <?php else: ?>
-        </li>
+            <?php if (!$hasChildren): ?>
+                </li>
+            <?php endif; ?>
         <?php if (strtolower($page->getLabel()) === 'home'): ?>
 		<li class="divider-vertical"></li>
 		<?php endif; ?>

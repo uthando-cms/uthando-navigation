@@ -30,16 +30,17 @@ class RouteList extends Select implements ServiceLocatorAwareInterface
     			$routeArray = $this->getChildRoutes($routeArray, $key, $val['child_routes']);
     		}
     	}
-    
+
     	return $routeArray;
     }
     
     protected function getChildRoutes($routeArray, $parent, $routes)
     {
     	foreach($routes as $key => $val){
-    		$routeArray[$parent . '/' . $key] = $parent . '/' . $key;
+            $key = $parent . '/' . $key;
+    		$routeArray[$key] = $key;
     		if (isset($val['child_routes'])) {
-    
+                $routeArray = $this->getChildRoutes($routeArray, $key, $val['child_routes']);
     		}
     	}
     	 
