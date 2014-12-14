@@ -1,36 +1,26 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   UthandoNavigation\Form\Element
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @link      https://github.com/uthando-cms for the canonical source repository
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
+
 namespace UthandoNavigation\Form\Element;
 
-use Zend\Form\Element\Select;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use UthandoUser\Form\Element\AbstractResourceList;
 
-class ResourceList extends Select implements ServiceLocatorAwareInterface
+/**
+ * Class ResourceList
+ * @package UthandoNavigation\Form\Element
+ */
+class ResourceList extends AbstractResourceList
 {
-    use ServiceLocatorAwareTrait;
-    
-    protected $emptyOption = 'None';
-    
-    public function init()
-    {
-        $config = $this->getServiceLocator()
-            ->getServiceLocator()
-            ->get('config');
-        
-        $resources = preg_grep("/^menu:/", $config['uthando_user']['acl']['resources']);
-        
-        $this->setValueOptions($this->getResources($resources));
-    }
-    
-    public function getResources($resources)
-    {
-    	$routeArray = [];
-    	
-    	foreach($resources as $val) {
-    	    
-    		$routeArray[$val] = $val;
-    	}
-    
-    	return $routeArray;
-    }
+    /**
+     * @var string
+     */
+    protected $resource = 'menu';
 }

@@ -1,15 +1,27 @@
 <?php
-
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   UthandoNavigation\Model
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @link      https://github.com/uthando-cms for the canonical source repository
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
 namespace UthandoNavigation\Model;
 
 use UthandoCommon\Model\Model;
-use UthandoCommon\Model\ModelInterface;
-use UthandoCommon\Model\NestedSetInterface;
 use UthandoCommon\Model\NestedSet;
+use UthandoUser\Model\ResourceTrait;
 
-class MenuItem extends NestedSet implements ModelInterface, NestedSetInterface
+/**
+ * Class MenuItem
+ * @package UthandoNavigation\Model
+ */
+class MenuItem extends NestedSet
 {   
-    use Model;
+    use Model,
+        ResourceTrait;
     
 	/**
 	 * @var int
@@ -40,11 +52,6 @@ class MenuItem extends NestedSet implements ModelInterface, NestedSetInterface
 	 * @var string
 	 */
 	protected $uri;
-	
-	/**
-	 * @var string
-	 */
-	protected $resource;
 	
 	/**
 	 * @var int
@@ -156,24 +163,6 @@ class MenuItem extends NestedSet implements ModelInterface, NestedSetInterface
     public function setUri($uri)
 	{
 		$this->uri = $uri;
-		return $this;
-	}
-
-    /**
-     * @return string
-     */
-    public function getResource()
-	{
-		return $this->resource;
-	}
-
-    /**
-     * @param $resource
-     * @return $this
-     */
-    public function setResource($resource)
-	{
-		$this->resource = $resource;
 		return $this;
 	}
 
