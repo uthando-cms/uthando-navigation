@@ -10,7 +10,7 @@
         <?php /* @var $page Zend\Navigation\Page\Mvc */ ?>
         <?php // when using partials we need to manually check for ACL conditions ?>
         <?php if( ! $page->isVisible() || !$this->uthandoNavigation()->accept($page)) continue; ?>
-        <?php $hasChildren = $page->hasChildren(); ?>
+        <?php $hasChildren = $page->hasPages(); ?>
 
         <?php if(!$hasChildren): ?>
         <li>

@@ -285,7 +285,7 @@ class TwitterBootstrapMenu extends ZendMenu
                 $liClasses[] = 'active';
             }
             // Is page parent?
-            if ($page->hasChildren() && (!isset($maxDepth) || $depth < $maxDepth)) {
+            if ($page->hasPages() && (!isset($maxDepth) || $depth < $maxDepth)) {
                 $liClasses[] = ($depth == 0) ? 'dropdown': 'dropdown-submenu';
                 $page->isDropdown = true;
                 
