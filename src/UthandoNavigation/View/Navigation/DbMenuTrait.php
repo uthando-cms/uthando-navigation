@@ -85,6 +85,10 @@ trait DbMenuTrait
             } else {
                 unset($p['uri']);
             }
+            
+            if ($p['resource'] == null) {
+                unset($p['resource']);
+            }
 
             $pageArray[] = $p;
         }
@@ -124,6 +128,7 @@ trait DbMenuTrait
                 $page['pages'] = $this->injectComponents($page['pages'], $routeMatch, $router);
             }
         }
+        
         return $pages;
     }
 
