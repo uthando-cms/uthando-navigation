@@ -20,7 +20,7 @@ use UthandoCommon\Controller\AbstractCrudController;
 class MenuController extends AbstractCrudController
 {
 	protected $controllerSearchOverrides = array('sort' => 'menu');
-	protected $serviceName = 'UthandoNavigation\Service\Menu';
+	protected $serviceName = 'UthandoNavigationMenu';
 	protected $route = 'admin/menu';
 	
 }

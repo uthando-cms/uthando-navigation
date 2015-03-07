@@ -22,12 +22,16 @@ class NavigationForm extends AbstractViewHelper
 {
 	public function __invoke()
     {
+        $serviceManager = $this->getServiceLocator()
+            ->getServiceLocator()
+            ->get('UthandoServiceManager');
+        
     	/* @var $menuItemMapper \UthandoNavigation\Service\MenuItem */
-        $menuItemMapper = $this->getServiceLocator()->getServiceLocator()->get('UthandoNavigation\Service\MenuItem');
+        $menuItemMapper = $serviceManager->get('UthandoNavigationMenuItem');
         $menuItems = $menuItemMapper->fetchAll();
         
         /* @var $menuMapper \UthandoNavigation\Service\Menu */
-        $menuMapper = $this->getServiceLocator()->getServiceLocator()->get('UthandoNavigation\Service\Menu');
+        $menuMapper = $serviceManager->get('UthandoNavigationMenu');
         $menus = $menuMapper->fetchAll();
         
         $select = new Element\Select('position');

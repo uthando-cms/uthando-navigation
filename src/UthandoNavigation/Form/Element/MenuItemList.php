@@ -49,7 +49,8 @@ class MenuItemList extends Select implements ServiceLocatorAwareInterface
         /* @var $service \UthandoNavigation\Service\MenuItem */
         $service = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoNavigation\Service\MenuItem');
+            ->get('UthandoServiceManager')
+            ->get('UthandoNavigationMenuItem');
         $items = $service->getMenuItemsByMenuId($this->getMenuId());
         
         $menuItemOptions = [];

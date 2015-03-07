@@ -20,7 +20,7 @@ use UthandoCommon\Controller\AbstractCrudController;
 class MenuItemController extends AbstractCrudController
 {
 	protected $controllerSearchOverrides = ['sort' => 'lft'];
-	protected $serviceName = 'UthandoNavigation\Service\MenuItem';
+	protected $serviceName = 'UthandoNavigationMenuItem';
 	protected $route = 'admin/menu-item';
 	
     public function indexAction()

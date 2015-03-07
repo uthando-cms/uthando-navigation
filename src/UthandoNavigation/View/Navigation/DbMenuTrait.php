@@ -57,7 +57,8 @@ trait DbMenuTrait
         /* @var $service \UthandoNavigation\Service\MenuItem */
         $service = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoNavigation\Service\MenuItem');
+            ->get('UthandoServiceManager')
+            ->get('UthandoNavigationMenuItem');
 
         $config = new Ini();
 
