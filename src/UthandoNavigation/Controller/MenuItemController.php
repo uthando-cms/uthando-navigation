@@ -23,10 +23,25 @@ class MenuItemController extends AbstractCrudController
 	protected $serviceName = 'UthandoNavigationMenuItem';
 	protected $route = 'admin/menu-item';
 	
+	protected function setMenuId()
+	{
+	    $menuId = $this->params('menuId', 0);
+	    $this->searchDefaultParams['menuId'] = $menuId;
+	    
+	    $session = $this->sessionContainer($this->getServiceName());
+	    
+	    $params = ($session->offsetGet('params')) ?: [];
+	    
+	    $params['menuId'] = $menuId;
+	    
+	    $session->offsetSet('params', $params);
+	    
+	    return $menuId;
+	}
+	
     public function indexAction()
-    {    	
-    	$menuId = $this->params('menuId', 0);
-    	$this->searchDefaultParams['menuId'] = $menuId;
+    {  	
+    	$menuId = $this->setMenuId();
     	
     	if (!$menuId) return $this->redirect()->toRoute('admin/menu');
     	
@@ -39,8 +54,7 @@ class MenuItemController extends AbstractCrudController
     
     public function listAction()
     {
-        $menuId = $this->params('menuId', 0);
-        $this->searchDefaultParams['menuId'] = $menuId;
+        $menuId = $this->setMenuId();
         
         $viewModel = parent::listAction();
         
