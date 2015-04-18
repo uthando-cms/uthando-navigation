@@ -6,12 +6,6 @@
 	],
 ]);?>
 
-<a href="<?=$this->url('admin/menu-item/edit', [
-		'menuId' => $this->menuId,
-		'action' => 'add',
-	]); ?>" class="btn btn-default">Add Menu Item</a>
-<div class="clear">&nbsp;</div>
-
 <div id="table-menuItem">
 	<?=$this->partial('uthando-navigation/menu-item/list', [
 	    'models' => $this->models,
