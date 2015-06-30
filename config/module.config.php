@@ -205,7 +205,7 @@ return [
             			'label'      => 'List All Menus',
             			'action'     => 'list',
             			'route'      => 'admin/menu',
-            			'resource'   => 'menu:admin'
+            			'resource'   => 'menu:admin',
             		],
             		'add' => [
             			'label'      => 'Add New Menu',
