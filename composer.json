@@ -15,11 +15,11 @@
     ],
     
     "require" : {
-	    "php" : ">=5.4",
+	    "php" : ">=7.0",
 	    "zendframework/zend-inputfilter" : "2.*",
 	    "zendframework/zend-form" : "2.*",
 	    "zendframework/zend-navigation" : "2.*",
-	    "uthando-cms/uthando-common" : "1.*",
+	    "uthando-cms/uthando-common" : "2.*",
 	    "uthando-cms/uthando-admin" : "1.*"
     },
     "require-dev" : {

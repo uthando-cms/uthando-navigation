@@ -1,6 +1,6 @@
 <?php
 
-namespace UthandoTwitterTest\Framework;
+namespace UthandoNavigationTest\Framework;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 

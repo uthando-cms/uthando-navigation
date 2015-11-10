@@ -11,15 +11,23 @@
 
 namespace UthandoNavigation;
 
+use UthandoCommon\Config\ConfigInterface;
+use UthandoCommon\Config\ConfigTrait;
 use UthandoNavigation\Event\ServiceListener;
 use Zend\Mvc\MvcEvent;
 
 /**
  * Class Module
+ *
  * @package UthandoNavigation
  */
-class Module
+class Module implements ConfigInterface
 {
+    use ConfigTrait;
+
+    /**
+     * @param MvcEvent $e
+     */
     public function onBootStrap(MvcEvent $e)
     {
         $app = $e->getApplication();
@@ -28,11 +36,17 @@ class Module
         $eventManager->attachAggregate(new ServiceListener());
     }
 
+    /**
+     * @return mixed
+     */
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
     }
 
+    /**
+     * @return array
+     */
     public function getAutoloaderConfig()
     {
         return [
@@ -41,5 +55,4 @@ class Module
             ],
         ];
     }
-
 }
