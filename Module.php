@@ -37,7 +37,7 @@ class Module implements ConfigInterface
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getConfig()
     {
