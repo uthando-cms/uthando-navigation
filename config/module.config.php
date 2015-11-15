@@ -4,7 +4,8 @@ return [
     'controllers' => [
         'invokables' => [
             'UthandoNavigation\Controller\Menu'       => 'UthandoNavigation\Mvc\Controller\MenuController',
-            'UthandoNavigation\Controller\MenuItem'   => 'UthandoNavigation\Mvc\ontroller\MenuItemController',
+            'UthandoNavigation\Controller\MenuItem'   => 'UthandoNavigation\Mvc\Controller\MenuItemController',
+            'UthandoNavigation\Controller\SiteMap'    => 'UthandoNavigation\Mvc\Controller\SiteMapController',
         ],
     ],
     'form_elements' => [
@@ -44,7 +45,8 @@ return [
     'uthando_services' => [
         'invokables' => [
             'UthandoNavigationMenu'     => 'UthandoNavigation\Service\Menu',
-            'UthandoNavigationMenuItem' => 'UthandoNavigation\Service\MenuItem'
+            'UthandoNavigationMenuItem' => 'UthandoNavigation\Service\MenuItem',
+            'UthandoNavigationSiteMap'  => 'UthandoNavigation\Service\SiteMap',
         ],
     ],
     'view_helpers' => [
@@ -55,5 +57,21 @@ return [
     ],
     'view_manager' => [
         'template_map' => include __DIR__  .'/../template_map.php',
+    ],
+    'router' => [
+        'routes' => [
+            'site-map' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/sitemap.xml',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'UthandoNavigation\Controller',
+                        'controller' => 'SiteMap',
+                        'action' => 'index',
+                        'force-ssl' => 'http'
+                    ]
+                ],
+            ],
+        ],
     ],
 ];

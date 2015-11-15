@@ -7,6 +7,9 @@ return [
                 'guest' => [
                     'privileges' => [
                         'allow' => [
+                            'controllers' => [
+                                'UthandoNavigation\Controller\SiteMap' => ['action' => 'all'],
+                            ],
                             'resources' => ['menu:guest'],
                         ],
                     ],
@@ -36,6 +39,7 @@ return [
             'resources' => [
                 'UthandoNavigation\Controller\Menu',
                 'UthandoNavigation\Controller\MenuItem',
+                'UthandoNavigation\Controller\SiteMap',
                 'menu:admin',
                 'menu:guest',
                 'menu:user',

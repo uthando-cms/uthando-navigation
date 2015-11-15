@@ -32,7 +32,13 @@ trait DbMenuTrait
     {
         $this->multiArray = $useMultiArray;
 
-        $container = $this->getPages($container);
+        /* @var $service \UthandoNavigation\Service\Menu */
+        $service = $this->getServiceLocator()
+            ->getServiceLocator()
+            ->get('UthandoServiceManager')
+            ->get('UthandoNavigationMenu');
+
+        $container = $service->getPages($container, $useMultiArray);
 
         // hack as acl and roles get reset to null
         // on every menu request.
@@ -50,87 +56,6 @@ trait DbMenuTrait
         }
 
         return parent::__invoke($container);
-    }
-
-    protected function getPages($menu)
-    {
-        /* @var $service \UthandoNavigation\Service\MenuItem */
-        $service = $this->getServiceLocator()
-            ->getServiceLocator()
-            ->get('UthandoServiceManager')
-            ->get('UthandoNavigationMenuItem');
-
-        $config = new Ini();
-
-        $pages = $service->getMenuItemsByMenu($menu, true);
-
-        $pageArray = [];
-
-        /* @var $page \UthandoNavigation\Model\MenuItem */
-        foreach ($pages as $page) {
-            $p = $page->getArrayCopy();
-            $params = $config->fromString($p['params']);
-
-            // need to initialise params array else error occurs
-            $p['params'] = [];
-
-            // params contain route params and other element params like:
-            // id, class etc.
-            foreach ($params as $key => $value) {
-                $p[$key] = $value;
-            }
-
-            if ($p['route'] == '0') {
-                unset($p['route']);
-                $p['uri'] = '#';
-            } else {
-                unset($p['uri']);
-            }
-            
-            if ($p['resource'] == null) {
-                unset($p['resource']);
-            }
-
-            $pageArray[] = $p;
-        }
-
-        if ($this->isMultiArray()) {
-            $pageArray = ArrayUtils::listToMultiArray($pageArray);
-        }
-
-        return new Navigation($this->preparePages($pageArray));
-    }
-
-    protected function preparePages($pages)
-    {
-        $application = $this->getServiceLocator()->getServiceLocator()->get('Application');
-        $routeMatch  = $application->getMvcEvent()->getRouteMatch();
-        $router      = $application->getMvcEvent()->getRouter();
-
-        return $this->injectComponents($pages, $routeMatch, $router);
-    }
-
-    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null)
-    {
-        foreach ($pages as &$page) {
-
-            $hasMvc = isset($page['action']) || isset($page['controller']) || isset($page['route']);
-            if ($hasMvc) {
-                if (!isset($page['routeMatch']) && $routeMatch) {
-                    $page['routeMatch'] = $routeMatch;
-                }
-
-                if (!isset($page['router'])) {
-                    $page['router'] = $router;
-                }
-            }
-
-            if (isset($page['pages'])) {
-                $page['pages'] = $this->injectComponents($page['pages'], $routeMatch, $router);
-            }
-        }
-        
-        return $pages;
     }
 
     /**
