@@ -107,7 +107,7 @@ class Menu extends AbstractMapperService
      * @param $pages
      * @return array
      */
-    protected function preparePages($pages)
+    public function preparePages($pages)
     {
         /* @var  Application $application */
         $application = $this->getService('Application');
