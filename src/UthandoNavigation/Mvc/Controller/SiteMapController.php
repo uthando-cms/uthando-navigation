@@ -13,7 +13,6 @@ namespace UthandoNavigation\Mvc\Controller;
 use UthandoCommon\Service\ServiceTrait;
 use UthandoNavigation\Service\SiteMap;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 
 /**
  * Class SiteMapController
@@ -38,13 +37,16 @@ class SiteMapController extends AbstractActionController
      */
     public function indexAction()
     {
-        $this->getResponse()->getHeaders()->addHeaderLine(
+        $response = $this->getResponse();
+        $response->getHeaders()->addHeaderLine(
             'Content-Type', 'text/xml'
         );
 
-        $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
+        $sitemap = $this->getService()->getSiteMap();
 
-        return $viewModel->setVariable('siteMap', $this->getService()->getSiteMap());
+        $response->setStatusCode(200);
+        $response->setContent($sitemap);
+
+        return $response;
     }
 }

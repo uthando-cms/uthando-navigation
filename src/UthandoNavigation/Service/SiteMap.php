@@ -10,6 +10,8 @@
 
 namespace UthandoNavigation\Service;
 
+use UthandoCommon\Cache\CacheStorageAwareInterface;
+use UthandoCommon\Cache\CacheTrait;
 use UthandoCommon\Service\AbstractService;
 
 /**
@@ -17,8 +19,10 @@ use UthandoCommon\Service\AbstractService;
  *
  * @package UthandoNavigation\Service
  */
-class SiteMap extends AbstractService
+class SiteMap extends AbstractService implements CacheStorageAwareInterface
 {
+    use CacheTrait;
+
     /**
      * @var string
      */
@@ -29,15 +33,26 @@ class SiteMap extends AbstractService
      */
     public function getSiteMap()
     {
-        /* @var $menuService Menu */
-        $menuService = $this->getService('UthandoNavigationMenu');
+        $sitemap = $this->getCacheItem('site-map');
 
-        $siteMap = $menuService->getPages();
+        if (null === $sitemap) {
+            /* @var $menuService Menu */
+            $menuService = $this->getService('UthandoNavigationMenu');
 
-        $argv = $this->prepareEventArguments(compact('siteMap'));
-        $this->getEventManager()->trigger('uthando.site-map', $this, $argv);
-        //$siteMap = $argv['$siteMap'];
+            $navigation = $menuService->getPages();
 
-        return $siteMap;
+            $argv = $this->prepareEventArguments(compact('navigation'));
+            $this->getEventManager()->trigger('uthando.site-map', $this, $argv);
+
+            $sitemap = $this->getService('ViewHelperManager')
+                ->get('uthandoNavigation')
+                ->setRole('guest')
+                ->sitemap($navigation)
+                ->render();
+
+            $this->setCacheItem('site-map', $sitemap);
+        }
+
+        return $sitemap;
     }
 }

@@ -11,7 +11,6 @@ return array(
     'uthando-navigation/menu-item/edit'          => __DIR__ . '/view/uthando-navigation/menu-item/edit.phtml',
     'uthando-navigation/menu-item/index'         => __DIR__ . '/view/uthando-navigation/menu-item/index.phtml',
     'uthando-navigation/menu-item/list'          => __DIR__ . '/view/uthando-navigation/menu-item/list.phtml',
-    'uthando-navigation/site-map/index'          => __DIR__ . '/view/uthando-navigation/site-map/index.phtml',
     'uthando-navigation/tb-menu'                 => __DIR__ . '/view/uthando-navigation/tb-menu.phtml',
     'uthando-navigation/tb-nested-menu'          => __DIR__ . '/view/uthando-navigation/tb-nested-menu.phtml',
 );
