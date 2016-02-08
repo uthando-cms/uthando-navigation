@@ -16,10 +16,7 @@ use UthandoCommon\Stdlib\ArrayUtils;
 use UthandoNavigation\Mapper\Menu as MenuMapper;
 use UthandoNavigation\Model\Menu as MenuModel;
 use Zend\Config\Reader\Ini;
-use Zend\Mvc\Application;
 use Zend\Navigation\Navigation;
-use Zend\Mvc\Router\RouteMatch;
-use Zend\Mvc\Router\RouteStackInterface as Router;
 
 /**
  * Class Menu
@@ -28,6 +25,8 @@ use Zend\Mvc\Router\RouteStackInterface as Router;
  */
 class Menu extends AbstractMapperService
 {
+    use NavigationTrait;
+
     /**
      * @var string
      */
@@ -101,48 +100,5 @@ class Menu extends AbstractMapperService
         }
 
         return new Navigation($this->preparePages($pageArray));
-    }
-
-    /**
-     * @param $pages
-     * @return array
-     */
-    public function preparePages($pages)
-    {
-        /* @var  Application $application */
-        $application = $this->getService('Application');
-        $routeMatch  = $application->getMvcEvent()->getRouteMatch();
-        $router      = $application->getMvcEvent()->getRouter();
-
-        return $this->injectComponents($pages, $routeMatch, $router);
-    }
-
-    /**
-     * @param array $pages
-     * @param RouteMatch|null $routeMatch
-     * @param Router|null $router
-     * @return array
-     */
-    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null)
-    {
-        foreach ($pages as &$page) {
-
-            $hasMvc = isset($page['action']) || isset($page['controller']) || isset($page['route']);
-            if ($hasMvc) {
-                if (!isset($page['routeMatch']) && $routeMatch) {
-                    $page['routeMatch'] = $routeMatch;
-                }
-
-                if (!isset($page['router'])) {
-                    $page['router'] = $router;
-                }
-            }
-
-            if (isset($page['pages'])) {
-                $page['pages'] = $this->injectComponents($page['pages'], $routeMatch, $router);
-            }
-        }
-
-        return $pages;
     }
 }

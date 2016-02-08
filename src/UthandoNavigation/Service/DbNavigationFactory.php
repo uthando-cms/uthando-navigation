@@ -11,6 +11,9 @@
 
 namespace UthandoNavigation\Service;
 
+use UthandoCommon\Stdlib\ArrayUtils;
+use Zend\Config\Reader\Ini;
+use Zend\Navigation\Navigation;
 use Zend\Navigation\Service\AbstractNavigationFactory;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -19,76 +22,76 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @package UthandoNavigation\Service
  */
 class DbNavigationFactory extends AbstractNavigationFactory
-{   
-	protected function getName()
-	{
-		return 'default';
-	}
-	
-	protected function getPages(ServiceLocatorInterface $serviceLocator)
-	{
-		/* @var $service \UthandoNavigation\Service\MenuItem */
-		$service = $serviceLocator->get('UthandoNavigation\Service\MenuItem');
-	
-		$pages = $service->getAllMenusAndMenuItems();
-	
-		$pageArray = [];
-	
-		/* @var $page \UthandoNavigation\Model\MenuItem */
-		foreach ($pages as $page) {
-			$p = $pages->getHydrator()->extract($page);
-			$p['params'] = parse_ini_string($p['params']);
-	
-			if ($p['route'] == '0') {
-				unset($p['route']);
-			} else {
-				unset($p['uri']);
-			}
-	
-			$pageArray[] = $p;
-		}
-	
-		return new $this->listToMultiArray($pageArray);
-	}
-	
-	protected function listToMultiArray($arrs)
-	{
-		$nested = [];
-		$depths = [];
-	
-		foreach($arrs as $key => $arr) {
-	
-			if( $arr['depth'] == 0 ) {
-				$nested[$key] = $arr;
-			} else {
-				$parent =& $nested;
-	
-				for ($i = 1; $i <= ($arr['depth']); $i++) {
-					$parent =& $parent[$depths[$i]];
-				}
-	
-				$parent['pages'][$key] = $arr;
-			}
-	
-			$depths[$arr['depth'] + 1] = $key;
-		}
-	
-		return $nested;
-	}
-	
-    public function traverseArray(&$array, $keys)
+{
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @return string
+     */
+    protected function getName()
     {
-        foreach ($array as $key => &$value) {
-            if (is_array($value)) {
-                self::traverseArray($value, $keys);
-            } else {
-                if (in_array($key, $keys) || '' == $value){
-                    unset($array[$key]);
-                }
-            }
-        }
-        
-        return $array;
+        return $this->name;
     }
-	
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    protected function getPages(ServiceLocatorInterface $serviceLocator)
+    {
+        /* @var $service \UthandoNavigation\Service\MenuItem */
+        $service = $serviceLocator->get('UthandoServiceManager')
+            ->getService('UthandoNavigationMenuItem');
+
+        $config = new Ini();
+
+        if (null === $this->getName()) {
+            $pages = $service->fetchAll();
+        } else {
+            $pages = $service->getMenuItemsByMenu($this->getName());
+        }
+
+        $pageArray = [];
+
+        /* @var $page \UthandoNavigation\Model\MenuItem */
+        foreach ($pages as $page) {
+            $p = $page->getArrayCopy();
+            $params = $config->fromString($p['params']);
+
+            // need to initialise params array else error occurs
+            $p['params'] = [];
+
+            // params contain route params and other element params like:
+            // id, class etc.
+            foreach ($params as $key => $value) {
+                $p[$key] = $value;
+            }
+
+            if ($p['route'] == '0') {
+                unset($p['route']);
+                $p['uri'] = '#';
+            } else {
+                unset($p['uri']);
+            }
+
+            if ($p['resource'] == null) {
+                unset($p['resource']);
+            }
+
+            $pageArray[] = $p;
+        }
+
+        $pageArray = ArrayUtils::listToMultiArray($pageArray);
+
+        return new Navigation($this->preparePages($pageArray));
+    }
 }

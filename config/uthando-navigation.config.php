@@ -5,6 +5,9 @@ return [
         'admin' => [
             'menu' => [
                 'label' => 'Menu',
+                'params' => [
+                    'icon' => 'fa-bars',
+                ],
                 'pages' => [
                     'list' => [
                         'label'      => 'List All Menus',

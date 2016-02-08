@@ -30,6 +30,14 @@ return [
             'UthandoNavigationMenuItem' => 'UthandoNavigation\InputFilter\MenuItem',
         ],
     ],
+    'service_manager' => [
+        'factories' => [
+            'UthandoNavigation\DbNavigation' => 'UthandoNavigation\Service\Factory\DbNavigationFactory',
+        ],
+        'abstract_factories' => [
+            'UthandoNavigation\Service\DbNavigationAbstractFactory',
+        ],
+    ],
     'uthando_mappers' => [
         'invokables' => [
             'UthandoNavigationMenu'     => 'UthandoNavigation\Mapper\Menu',

@@ -1,24 +1,25 @@
-
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'menu',
-	'searchInputs'	=> [
-		'Menu' => 'menu',
-	],
-]);?>
+<?= $this->partial('uthando-admin/partial/search', [
+    'name' => 'menu',
+    'searchInputs' => [
+        'Menu' => 'menu',
+    ],
+]); ?>
 
 <div id="table-menu">
-	<?=$this->partial('uthando-navigation/menu/list', [
-	    'models' => $this->models
-	]); ?>
+    <?= $this->partial('uthando-navigation/menu/list', [
+        'models' => $this->models
+    ]); ?>
 </div>
 
 
 <script>
-	$('#table-menu').dataGrid({
-    	url : 'menu/list',
-    	query: { sort : 'name' },
-    	searchForm : $('#search-menu'),
-    	paging : 'links',
-    	columnSort: true
-	});
+    $(document).ready(function() {
+        $('#table-menu').dataGrid({
+            url: 'menu/list',
+            query: {sort: 'menu'},
+            searchForm: $('#search-menu'),
+            paging: 'links',
+            columnSort: true
+        });
+    });
 </script>

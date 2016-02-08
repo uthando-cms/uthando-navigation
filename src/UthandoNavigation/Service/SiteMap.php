@@ -21,7 +21,8 @@ use UthandoCommon\Service\AbstractService;
  */
 class SiteMap extends AbstractService implements CacheStorageAwareInterface
 {
-    use CacheTrait;
+    use CacheTrait,
+        NavigationTrait;
 
     /**
      * @var string
@@ -29,7 +30,9 @@ class SiteMap extends AbstractService implements CacheStorageAwareInterface
     protected $serviceAlias = 'UthandoNavigationSiteMap';
 
     /**
-     * @return \Zend\Navigation\Navigation
+     * Returns a formatted xml sitemap string
+     *
+     * @return string
      */
     public function getSiteMap()
     {
