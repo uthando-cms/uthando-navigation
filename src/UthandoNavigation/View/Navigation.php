@@ -15,6 +15,7 @@ use Zend\View\Helper\Navigation as ZendNavigation;
 
 /**
  * Class Navigation
+ *
  * @package UthandoNavigation\View
  */
 class Navigation extends ZendNavigation
@@ -29,29 +30,6 @@ class Navigation extends ZendNavigation
         'uthandoTbDbMenu'   => 'UthandoNavigation\View\Navigation\TwitterBootstrapDbMenu',
         'uthandoTbMenu'     => 'UthandoNavigation\View\Navigation\TwitterBootstrapMenu',
     ];
-    
-    public function getAcl()
-    {
-    	if (!$this->hasAcl()) {
-    		$acl = $this->getServiceLocator()
-    		  ->getServiceLocator()
-    		  ->get('UthandoUser\Service\Acl');
-    		$this->setAcl($acl);
-    	}
-
-    	return parent::getAcl();
-    }
-    
-    public function getRole()
-    {
-        if (!$this->hasRole()) {
-            $identity = $this->view->plugin('identity');
-            $role = ($identity()) ? $identity()->getRole() : 'guest';
-            $this->setRole($role);
-        }
-        
-        return parent::getRole();
-    }
 
     /**
      * Retrieve plugin loader for navigation helpers

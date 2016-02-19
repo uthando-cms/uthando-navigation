@@ -33,4 +33,7 @@ return array(
     'UthandoNavigation\View\Navigation\TwitterBootstrapMenu'   => __DIR__ . '/src/UthandoNavigation/View/Navigation/TwitterBootstrapMenu.php',
     'UthandoNavigation\View\Navigation'                        => __DIR__ . '/src/UthandoNavigation/View/Navigation.php',
     'UthandoNavigation\View\NavigationForm'                    => __DIR__ . '/src/UthandoNavigation/View/NavigationForm.php',
+    'UthandoNavigation\View\Service\NavigationFactory'         => __DIR__ . '/src/UthandoNavigation/View/Service/NavigationFactory.php',
+    'UthandoNavigationTest\Bootstrap'                          => __DIR__ . '/test/Bootstrap.php',
+    'UthandoNavigationTest\Framework\TestCase'                 => __DIR__ . '/test/UthandoNavigationTest/Framework/TestCase.php',
 );

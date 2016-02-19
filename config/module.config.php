@@ -58,9 +58,12 @@ return [
         ],
     ],
     'view_helpers' => [
+        'factories' => [
+            'UthandoNavigation' => 'UthandoNavigation\View\Service\NavigationFactory',
+        ],
         'invokables' => [
             'NavigationForm'    => 'UthandoNavigation\View\NavigationForm',
-            'UthandoNavigation' => 'UthandoNavigation\View\Navigation',
+            //'UthandoNavigation' => 'UthandoNavigation\View\Navigation',
         ],
     ],
     'view_manager' => [

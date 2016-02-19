@@ -18,6 +18,7 @@ use Zend\Navigation\Page\AbstractPage;
 
 /**
  * Class TwitterBootstrapMenu
+ *
  * @package UthandoNavigation\View\Navigation
  */
 class TwitterBootstrapMenu extends ZendMenu
