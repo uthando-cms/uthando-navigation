@@ -13,6 +13,7 @@ namespace UthandoNavigation\View\Navigation;
 
 /**
  * Class DbMenuTrait
+ *
  * @package UthandoNavigation\View\Navigation
  */
 trait DbMenuTrait

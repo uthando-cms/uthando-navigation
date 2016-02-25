@@ -63,7 +63,7 @@ class MenuItem extends AbstractMapperService
 	public function add(array $post, Form $form = null)
 	{
 		$menuItem = $this->getMapper()->getModel();
-		$form  = $this->getForm($menuItem, $post, true, true);
+		$form  = $this->prepareForm($menuItem, $post, true, true);
 		$position = (int) $post['position'];
 		$insertType = (string) $post['menuInsertType'];
 	
@@ -81,7 +81,7 @@ class MenuItem extends AbstractMapperService
     
 	public function edit(ModelInterface $model, array $post, Form $form = null)
 	{
-		$form  = $this->getForm($model, $post, true, true);
+		$form  = $this->prepareForm($model, $post, true, true);
 	
 		if (!$form->isValid()) {
 			return $form;
