@@ -25,7 +25,7 @@ trait NavigationTrait
     * @param $pages
     * @return array
     */
-    public function preparePages($pages) : array
+    public function preparePages($pages)
     {
         /* @var  Application $application */
         $application = $this->getService('Application');
@@ -41,7 +41,7 @@ trait NavigationTrait
      * @param RouteStackInterface|null $router
      * @return array
      */
-    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, RouteStackInterface $router = null) : array
+    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, RouteStackInterface $router = null)
     {
         foreach ($pages as &$page) {
 
