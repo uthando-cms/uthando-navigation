@@ -9,18 +9,43 @@ return [
                     'icon' => 'fa-bars',
                 ],
                 'pages' => [
-                    'list' => [
-                        'label'      => 'List All Menus',
-                        'action'     => 'list',
-                        'route'      => 'admin/menu',
-                        'resource'   => 'menu:admin',
-                    ],
                     'add' => [
-                        'label'      => 'Add New Menu',
+                        'label'      => 'Add Menu',
                         'action'     => 'add',
                         'route'      => 'admin/menu/edit',
-                        'resource'   => 'menu:admin'
+                        'resource'   => 'menu:admin',
+                        'visible'    => false,
                     ],
+                    'edit' => [
+                        'label'      => 'Edit Menu',
+                        'action'     => 'edit',
+                        'route'      => 'admin/menu/edit',
+                        'resource'   => 'menu:admin',
+                        'visible'    => false,
+                    ],
+                    'menu-item' => [
+                        'label' => 'Menu Item',
+                        'route' => 'admin/menu-item',
+                        'pages' => [
+                            'add' => [
+                                'label'      => 'Add Menu Item',
+                                'action'     => 'add',
+                                'route'      => 'admin/menu-item/edit',
+                                'resource'   => 'menu:admin',
+                                'visible'    => false,
+                            ],
+                            'edit' => [
+                                'label'      => 'Edit Menu Item',
+                                'action'     => 'edit',
+                                'route'      => 'admin/menu-item/edit',
+                                'resource'   => 'menu:admin',
+                                'visible'    => false,
+                            ],
+                        ],
+                        'resource' => 'menu:admin',
+                        'visible'    => false,
+                    ],
+
                 ],
                 'route' => 'admin/menu',
                 'resource' => 'menu:admin'

@@ -1,25 +1,33 @@
+<?php $this->headTitle('Menu Item') ?>
+<?php $this->layout()->pageTitle = $this->translate('Menu Item');?>
 
-<?=$this->partial('uthando-admin/partial/search', [
-	'name'			=> 'menuItem',
-	'searchInputs'	=> [
-		'Menu Item' => 'menuItemId',
-	],
-    'excludeMenu'   => true,
-]);?>
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/menu-item/edit', [
+    'menuId' => $this->menuId,
+    'action' => 'add'
+]);?>" type="submit" data-toggle="tooltip" title="<?=$this->translate('Add Menu Item');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
 
-<p>
-    <a href="<?=$this->url('admin/menu-item/edit', [
-        'menuId' => $this->menuId,
-        'action' => 'add',
-    ]); ?>" class="btn btn-default">Add Menu Item</a>
-</p>
-
-
-<div id="table-menuItem">
-	<?=$this->partial('uthando-navigation/menu-item/list', [
-	    'models' => $this->models,
-	    'menuId' => $this->menuId,
-	]); ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Menu Item List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'menuItem',
+            'searchInputs'	=> [
+                $this->translate('Menu Item') => 'menuItemId',
+            ],
+        ]);?>
+    </div>
+    <div id="table-menuItem" class="admin-table">
+        <?=$this->partial('uthando-navigation/menu-item/list', [
+            'models' => $this->models,
+            'menuId' => $this->menuId,
+        ]); ?>
+    </div>
 </div>
 
 <?php $this->inlineScript()->captureStart(); ?>

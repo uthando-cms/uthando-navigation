@@ -62,6 +62,7 @@ class MenuItem extends AbstractMapperService
 	
 	public function add(array $post, Form $form = null)
 	{
+
 		$menuItem = $this->getMapper()->getModel();
 		$form  = $this->prepareForm($menuItem, $post, true, true);
 		$position = (int) $post['position'];

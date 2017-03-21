@@ -8,6 +8,7 @@
 
 namespace UthandoNavigation\Form\Element;
 
+use UthandoCommon\Mapper\AbstractNestedSet;
 use Zend\Form\Element\Radio;
 
 class MenuItemRadio extends Radio
@@ -24,7 +25,7 @@ class MenuItemRadio extends Radio
 
             ],
             [
-                'value' => 'insert',
+                'value' => AbstractNestedSet::INSERT_NODE,
                 'label' => 'Insert after.',
                 'label_attributes' => [
                     'class' => 'col-md-12',
@@ -32,7 +33,7 @@ class MenuItemRadio extends Radio
 
             ],
             [
-                'value' => 'insertSub',
+                'value' => AbstractNestedSet::INSERT_CHILD,
                 'label' => 'Insert as a sub-page.',
                 'label_attributes' => [
                     'class' => 'col-md-12',

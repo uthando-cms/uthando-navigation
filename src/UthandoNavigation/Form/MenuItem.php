@@ -11,6 +11,7 @@
 
 namespace UthandoNavigation\Form;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 /**
@@ -19,32 +20,22 @@ use Zend\Form\Form;
  */
 class MenuItem extends Form
 {
-	public function __construct()
-	{
-		parent::__construct('Menu Item');
-	}
-	
 	public function init()
 	{
-		$this->add([
-			'name' => 'menuItemId',
-			'type' => 'hidden',
-		]);
-		
-		$this->add([
-			'name' => 'menuId',
-			'type' => 'hidden',
-		]);
-		
 		$this->add([
 			'name' => 'label',
 			'type' => 'text',
 			'options' => [
-				'label' => 'Label:',
+				'label' => 'Label',
 				'required' => true,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
 			],
 			'attributes' =>[
-				'placeholder' => 'Label:',
+				'placeholder' => 'Label',
 			],
 		]);
 		
@@ -52,11 +43,16 @@ class MenuItem extends Form
 			'name' => 'params',
 			'type' => 'textarea',
 			'options' => [
-				'label' => 'Params:',
+				'label' => 'Params',
 				'required' => false,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
 			],
 			'attributes' => [
-				'placeholder' => 'Params:',
+				'placeholder' => 'Params',
 			],
 		]);
 		
@@ -64,8 +60,13 @@ class MenuItem extends Form
 			'name' => 'route',
 			'type' => 'RouteList',
 			'options' => [
-				'label' => 'Route:',
+				'label' => 'Route',
 				'required' => false,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
 			],
 		]);
 		
@@ -73,8 +74,13 @@ class MenuItem extends Form
 			'name' => 'resource',
 			'type' => 'ResourceList',
 			'options' => [
-				'label' => 'Resource:',
+				'label' => 'Resource',
 				'required' => false,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
 			],
 			'attributes' => [
 				'placeholder' => 'Resource:',
@@ -85,23 +91,63 @@ class MenuItem extends Form
 			'name' => 'visible',
 			'type' => 'select',
 			'options' => [
-				'label' => 'Is Visible:',
+				'label' => 'Is Visible',
 				'required' => true,
 				'empty_option' => '---Please select option---',
 				'value_options' => [
 					'0'	=> 'No',
 					'1'	=> 'Yes',
 				],
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
 			],
 		]);
-		
-		$this->add([
-			'name' => 'position',
-			'type' => 'MenuItemList',
-			'options' => [
-                'label'     => 'Location In Menu:',
-                'required'  => true,
-			],
-		]);
+
+        $this->add([
+            'name' => 'position',
+            'type' => 'MenuItemList',
+            'options' => [
+                'label' => 'Menu Placement',
+                'required' => false,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'menuInsertType',
+            'type' => 'MenuItemRadio',
+            'options' => [
+                'label' => 'Insert Type',
+                'required' => false,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'menuItemId',
+            'type' => 'hidden',
+        ]);
+
+        $this->add([
+            'name' => 'menuId',
+            'type' => 'hidden',
+        ]);
+
+
+        $this->add([
+            'name' => 'security',
+            'type' => 'csrf',
+        ]);
 	}
 }
