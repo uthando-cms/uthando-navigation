@@ -14,6 +14,7 @@ return [
             'UthandoNavigationMenuItem' => 'UthandoNavigation\Form\MenuItem',
 
             'MenuItemList'              => 'UthandoNavigation\Form\Element\MenuItemList',
+            'MenuItemRadio'             => 'UthandoNavigation\Form\Element\MenuItemRadio',
             'ResourceList'              => 'UthandoNavigation\Form\Element\ResourceList',
             'RouteList'                 => 'UthandoNavigation\Form\Element\RouteList',
         ],

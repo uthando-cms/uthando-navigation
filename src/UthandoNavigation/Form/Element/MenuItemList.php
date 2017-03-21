@@ -22,14 +22,21 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 class MenuItemList extends Select implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
-    
-    //protected $emptyOption = '---Please select a menu item---';
+
+    /**
+     * @var string
+     */
+    protected $emptyOption = '---Please Select a page---';
     
     /**
      * @var int
      */
     protected $menuId = 0;
-    
+
+    /**
+     * @param array|\Traversable $options
+     * @return void|Select|\Zend\Form\ElementInterface
+     */
     public function setOptions($options)
     {
         parent::setOptions($options);
@@ -38,37 +45,72 @@ class MenuItemList extends Select implements ServiceLocatorAwareInterface
             $this->setMenuId($this->options['menu_id']);
         }
     }
-    
+
+    /**
+     * @return array
+     */
     public function getValueOptions()
     {
     	return ($this->valueOptions) ?: $this->getMenuItems();
     }
-    
+
+    /**
+     * @return array
+     */
     public function getMenuItems()
     {
-        /* @var $service \UthandoNavigation\Service\MenuItem */
-        $service = $this->getServiceLocator()
+        $serviceManager = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager')
-            ->get('UthandoNavigationMenuItem');
-        $items = $service->getMenuItemsByMenuId($this->getMenuId());
-        
-        $menuItemOptions = [];
-         
-        $menuItemOptions[0] = 'Add to top of menu';
-         
-        foreach($items as $item){
-        	$menuItemOptions[$item->getMenuItemId()] = $item->getLabel();
+            ->get('UthandoServiceManager');
+
+        /* @var $menuItemMapper \UthandoNavigation\Service\MenuItem */
+        $menuItemMapper = $serviceManager->get('UthandoNavigationMenuItem');
+
+        /* @var $menuMapper \UthandoNavigation\Service\Menu */
+        $menuMapper = $serviceManager->get('UthandoNavigationMenu');
+
+        $menuItemsOptions   = [];
+        $menuArray          = [];
+
+        if ($this->getMenuId()) {
+            $items = $menuItemMapper->getMenuItemsByMenuId($this->getMenuId());
+            $menus = [$menuMapper->getById($this->getMenuId())];
+        } else {
+            $menus = $menuMapper->fetchAll();
+            $items = $menuItemMapper->fetchAll();
+        }
+
+        foreach ($menus as $menu) {
+            $menuArray[$menu->getMenuId()] = $menu->getMenu();
+            $menuItemsOptions[$menu->getMenuId()]['options'][$menu->getMenuId() . '-' . '0'] = 'At top of this menu';
+            $menuItemsOptions[$menu->getMenuId()]['label'] = $menu->getMenu();
+        }
+
+        /* @var $page \UthandoNavigation\Model\MenuItem */
+        foreach ($items as $menuItem) {
+            $ident = ($menuItem->getDepth() > 0) ? str_repeat('&nbsp;&nbsp;',($menuItem->getDepth())) . '&bull;&nbsp;' : '';
+            $menuItemsOptions[$menuItem->getMenuId()]['options'][] = [
+                'value'                 => $menuItem->getMenuId() . '-' . $menuItem->getMenuItemId(),
+                'label'                 => $ident . $menuItem->getLabel(),
+                'disable_html_escape'   => true,
+            ];
         }
         
-        return $menuItemOptions;
+        return $menuItemsOptions;
     }
-    
+
+    /**
+     * @return int
+     */
     public function getMenuId()
     {
     	return $this->menuId;
     }
-    
+
+    /**
+     * @param $menuId
+     * @return $this
+     */
     public function setMenuId($menuId)
     {
     	$this->menuId = $menuId;

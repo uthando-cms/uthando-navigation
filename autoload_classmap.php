@@ -6,6 +6,7 @@ return array(
     'UthandoNavigation\Event\ServiceListener'                  => __DIR__ . '/src/UthandoNavigation/Event/ServiceListener.php',
     'UthandoNavigation\Event\SiteMapListenerInterface'         => __DIR__ . '/src/UthandoNavigation/Event/SiteMapListenerInterface.php',
     'UthandoNavigation\Form\Element\MenuItemList'              => __DIR__ . '/src/UthandoNavigation/Form/Element/MenuItemList.php',
+    'UthandoNavigation\Form\Element\MenuItemRadio'             => __DIR__ . '/src/UthandoNavigation/Form/Element/MenuItemRadio.php',
     'UthandoNavigation\Form\Element\ResourceList'              => __DIR__ . '/src/UthandoNavigation/Form/Element/ResourceList.php',
     'UthandoNavigation\Form\Element\RouteList'                 => __DIR__ . '/src/UthandoNavigation/Form/Element/RouteList.php',
     'UthandoNavigation\Form\Menu'                              => __DIR__ . '/src/UthandoNavigation/Form/Menu.php',
