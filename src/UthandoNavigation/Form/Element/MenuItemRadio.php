@@ -13,11 +13,14 @@ use Zend\Form\Element\Radio;
 
 class MenuItemRadio extends Radio
 {
+    /**
+     * init
+     */
     public function init()
     {
         $valueOptions = [
             [
-                'value' => 'noInsert',
+                'value' => AbstractNestedSet::INSERT_NO,
                 'label' => 'No change.',
                 'label_attributes' => [
                     'class' => 'col-md-12',
@@ -44,6 +47,6 @@ class MenuItemRadio extends Radio
 
         $this->setValueOptions($valueOptions);
 
-        $this->setValue('noInsert');
+        $this->setValue(AbstractNestedSet::INSERT_NO);
     }
 }

@@ -12,6 +12,8 @@
 
 <?php
 
+$this->form->get('menuId')->setValue($this->routeParams['menuId']);
+
 $this->form->setAttributes([
     'method' => 'post',
     'id' => 'form-menu-item',
