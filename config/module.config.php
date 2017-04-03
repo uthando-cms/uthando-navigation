@@ -80,7 +80,6 @@ return [
                         '__NAMESPACE__' => 'UthandoNavigation\Controller',
                         'controller' => 'SiteMap',
                         'action' => 'index',
-                        'force-ssl' => 'http'
                     ]
                 ],
             ],
