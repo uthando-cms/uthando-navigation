@@ -22,9 +22,15 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 class RouteList extends Select implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
-    
+
+    /**
+     * @var string
+     */
     protected $emptyOption = '---Please select a Route---';
-    
+
+    /**
+     * init
+     */
     public function init()
     {
         $config = $this->getServiceLocator()
@@ -34,10 +40,18 @@ class RouteList extends Select implements ServiceLocatorAwareInterface
         $routes = $config['router']['routes'];
         $this->setValueOptions($this->getRoutes($routes));
     }
-    
+
+    /**
+     * @param $routes
+     * @return array
+     */
     public function getRoutes($routes)
     {
-    	$routeArray = [0 => 'Category Heading'];
+    	$routeArray = [
+    	    'heading'   => 'Category Heading',
+            'link'      => 'Link'
+        ];
+
     	foreach($routes as $key => $val){
     		$routeArray[$key] = $key;
     		if (isset($val['child_routes'])) {
@@ -47,14 +61,21 @@ class RouteList extends Select implements ServiceLocatorAwareInterface
 
     	return $routeArray;
     }
-    
-    protected function getChildRoutes($routeArray, $parent, $routes)
+
+    /**
+     * @param $routeArray
+     * @param $parent
+     * @param $routes
+     * @param int $depth
+     * @return mixed
+     */
+    protected function getChildRoutes($routeArray, $parent, $routes, $depth = 1)
     {
     	foreach($routes as $key => $val){
-            $key = $parent . '/' . $key;
+            $key = $parent . ' : ' . $key;
     		$routeArray[$key] = $key;
     		if (isset($val['child_routes'])) {
-                $routeArray = $this->getChildRoutes($routeArray, $key, $val['child_routes']);
+                $routeArray = $this->getChildRoutes($routeArray, $key, $val['child_routes'], $depth++);
     		}
     	}
     	 

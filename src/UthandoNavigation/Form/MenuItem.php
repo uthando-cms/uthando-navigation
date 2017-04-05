@@ -12,6 +12,16 @@
 namespace UthandoNavigation\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
+use UthandoNavigation\Form\Element\MenuItemList;
+use UthandoNavigation\Form\Element\MenuItemRadio;
+use UthandoNavigation\Form\Element\ResourceList;
+use UthandoNavigation\Form\Element\RouteList;
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Hidden;
+use Zend\Form\Element\Select;
+use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
+use Zend\Form\Element\Url;
 use Zend\Form\Form;
 
 /**
@@ -24,7 +34,7 @@ class MenuItem extends Form
 	{
 		$this->add([
 			'name' => 'label',
-			'type' => 'text',
+			'type' => Text::class,
 			'options' => [
 				'label' => 'Label',
 				'required' => true,
@@ -41,7 +51,7 @@ class MenuItem extends Form
 		
 		$this->add([
 			'name' => 'params',
-			'type' => 'textarea',
+			'type' => Textarea::class,
 			'options' => [
 				'label' => 'Params',
 				'required' => false,
@@ -58,7 +68,7 @@ class MenuItem extends Form
 		
 		$this->add([
 			'name' => 'route',
-			'type' => 'RouteList',
+			'type' => RouteList::class,
 			'options' => [
 				'label' => 'Route',
 				'required' => false,
@@ -72,7 +82,7 @@ class MenuItem extends Form
 		
 		$this->add([
 			'name' => 'resource',
-			'type' => 'ResourceList',
+			'type' => ResourceList::class,
 			'options' => [
 				'label' => 'Resource',
 				'required' => false,
@@ -86,10 +96,23 @@ class MenuItem extends Form
 				'placeholder' => 'Resource:',
 			],
 		]);
+
+        $this->add([
+            'name' => 'uri',
+            'type' => Url::class,
+            'options' => [
+                'label' => 'URI',
+                'column-size' => 'sm-10',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+            ],
+        ]);
 		
 		$this->add([
 			'name' => 'visible',
-			'type' => 'select',
+			'type' => Select::class,
 			'options' => [
 				'label' => 'Is Visible',
 				'required' => true,
@@ -108,7 +131,7 @@ class MenuItem extends Form
 
         $this->add([
             'name' => 'position',
-            'type' => 'MenuItemList',
+            'type' => MenuItemList::class,
             'options' => [
                 'label' => 'Menu Placement',
                 'required' => false,
@@ -122,7 +145,7 @@ class MenuItem extends Form
 
         $this->add([
             'name' => 'menuInsertType',
-            'type' => 'MenuItemRadio',
+            'type' => MenuItemRadio::class,
             'options' => [
                 'label' => 'Insert Type',
                 'required' => false,
@@ -136,18 +159,18 @@ class MenuItem extends Form
 
         $this->add([
             'name' => 'menuItemId',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
         $this->add([
             'name' => 'menuId',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
 
         $this->add([
             'name' => 'security',
-            'type' => 'csrf',
+            'type' => Csrf::class,
         ]);
 	}
 }

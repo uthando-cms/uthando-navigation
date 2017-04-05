@@ -11,6 +11,7 @@
 namespace UthandoNavigation\View\Service;
 
 use UthandoNavigation\View\Navigation;
+use UthandoUser\Service\Acl;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Helper\Identity;
@@ -44,7 +45,7 @@ class NavigationFactory implements FactoryInterface
         $this->serviceLocator = $serviceLocator;
 
         $acl = $this->serviceLocator->getServiceLocator()
-            ->get('UthandoUser\Service\Acl');
+            ->get(Acl::class);
 
         $identity = $this->getIdentityHelper();
 

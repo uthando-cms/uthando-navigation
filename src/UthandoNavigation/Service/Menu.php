@@ -81,11 +81,17 @@ class Menu extends AbstractMapperService
                 $p[$key] = $value;
             }
 
-            if ($p['route'] == '0') {
-                unset($p['route']);
-                $p['uri'] = '#';
-            } else {
-                unset($p['uri']);
+            switch ($p['route']) {
+                case 'heading':
+                    $p['uri'] ='#';
+                    unset($p['route']);
+                    break;
+                case 'link':
+                    unset($p['route']);
+                    break;
+                default:
+                    unset($p['uri']);
+                    break;
             }
 
             if ($p['resource'] == null) {

@@ -10,8 +10,8 @@ return [
                         'options' => [
                             'route' => '/menu',
                             'defaults' => [
-                                '__NAMESPACE__' => 'UthandoNavigation\Controller',
-                                'controller' => 'Menu',
+                                '__NAMESPACE__' => 'UthandoNavigation\Mvc\Controller',
+                                'controller' => 'MenuController',
                                 'action' => 'index',
                             ],
                         ],
@@ -54,8 +54,8 @@ return [
                                 'menuId' => '\d+',
                             ],
                             'defaults' => [
-                                '__NAMESPACE__' => 'UthandoNavigation\Controller',
-                                'controller' => 'MenuItem',
+                                '__NAMESPACE__' => 'UthandoNavigation\Mvc\Controller',
+                                'controller' => 'MenuItemController',
                                 'action' => 'index',
                             ],
                         ],

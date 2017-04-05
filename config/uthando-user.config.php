@@ -1,5 +1,9 @@
 <?php
 
+use UthandoNavigation\Mvc\Controller\MenuController;
+use UthandoNavigation\Mvc\Controller\MenuItemController;
+use UthandoNavigation\Mvc\Controller\SiteMapController;
+
 return [
     'uthando_user' => [
         'acl' => [
@@ -8,7 +12,7 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoNavigation\Controller\SiteMap' => ['action' => 'all'],
+                                SiteMapController::class => ['action' => 'all'],
                             ],
                             'resources' => ['menu:guest'],
                         ],
@@ -28,8 +32,8 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoNavigation\Controller\Menu' => ['action' => 'all'],
-                                'UthandoNavigation\Controller\MenuItem' => ['action' => 'all'],
+                                MenuController::class       => ['action' => 'all'],
+                                MenuItemController::class   => ['action' => 'all'],
                             ],
                             'resources' => ['menu:admin'],
                         ],
@@ -37,9 +41,9 @@ return [
                 ],
             ],
             'resources' => [
-                'UthandoNavigation\Controller\Menu',
-                'UthandoNavigation\Controller\MenuItem',
-                'UthandoNavigation\Controller\SiteMap',
+                MenuController::class,
+                MenuItemController::class,
+                SiteMapController::class,
                 'menu:admin',
                 'menu:guest',
                 'menu:user',

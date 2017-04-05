@@ -11,6 +11,9 @@
 
 namespace UthandoNavigation\View;
 
+use UthandoNavigation\View\Navigation\DbMenu;
+use UthandoNavigation\View\Navigation\TwitterBootstrapDbMenu;
+use UthandoNavigation\View\Navigation\TwitterBootstrapMenu;
 use Zend\View\Helper\Navigation as ZendNavigation;
 
 /**
@@ -26,9 +29,9 @@ class Navigation extends ZendNavigation
      * @var array
      */
     protected $defaultPluginManagerHelpers = [
-        'uthandoDbMenu'     => 'UthandoNavigation\View\Navigation\DbMenu',
-        'uthandoTbDbMenu'   => 'UthandoNavigation\View\Navigation\TwitterBootstrapDbMenu',
-        'uthandoTbMenu'     => 'UthandoNavigation\View\Navigation\TwitterBootstrapMenu',
+        'uthandoDbMenu'     => DbMenu::class,
+        'uthandoTbDbMenu'   => TwitterBootstrapDbMenu::class,
+        'uthandoTbMenu'     => TwitterBootstrapMenu::class,
     ];
 
     /**

@@ -10,7 +10,13 @@
  */
 namespace UthandoNavigation\InputFilter;
 
+use UthandoCommon\Filter\Ucwords;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
 use Zend\InputFilter\InputFilter;
+use Zend\Uri\Http;
+use Zend\Validator\StringLength;
+use Zend\Validator\Uri;
 
 /**
  * Class MenuItem
@@ -24,12 +30,12 @@ class MenuItem extends InputFilter
             'name'       => 'label',
             'required'   => true,
             'filters'    => [
-                ['name'    => 'StripTags'],
-                ['name'    => 'StringTrim'],
-                ['name'    => 'UthandoCommon\Filter\Ucwords'],
+                ['name'    => StripTags::class],
+                ['name'    => StringTrim::class],
+                ['name'    => Ucwords::class],
             ],
             'validators' => [
-                ['name'    => 'StringLength', 'options' => [
+                ['name'    => StringLength::class, 'options' => [
                     'encoding' => 'UTF-8',
                     'min'      => 2,
                     'max'      => 255,
@@ -41,8 +47,8 @@ class MenuItem extends InputFilter
             'name'       => 'params',
             'required'   => false,
             'filters'    => [
-                ['name'    => 'StripTags'],
-                ['name'    => 'StringTrim'],
+                ['name'    => StripTags::class],
+                ['name'    => StringTrim::class],
             ],
         ]);
 		
@@ -50,14 +56,34 @@ class MenuItem extends InputFilter
             'name'       => 'route',
             'required'   => false,
             'filters'    => [
-                ['name'    => 'StripTags'],
-                ['name'    => 'StringTrim'],
+                ['name'    => StripTags::class],
+                ['name'    => StringTrim::class],
             ],
             'validators' => [
-                ['name'    => 'StringLength', 'options' => [
+                ['name'    => StringLength::class, 'options' => [
                     'encoding' => 'UTF-8',
                     'min'      => 0,
                     'max'      => 255,
+                ]],
+            ],
+        ]);
+
+        $this->add([
+            'name'       => 'uri',
+            'required'   => false,
+            'filters'    => [
+                ['name'    => StripTags::class],
+                ['name'    => StringTrim::class],
+            ],
+            'validators' => [
+                ['name'    => StringLength::class, 'options' => [
+                    'encoding' => 'UTF-8',
+                    'min'      => 0,
+                    'max'      => 255,
+                ]],
+                ['name' => Uri::class, 'options' => [
+                    'uriHandler'    => Http::class,
+                    'allowRelative' => false,
                 ]],
             ],
         ]);
@@ -66,11 +92,11 @@ class MenuItem extends InputFilter
             'name'       => 'resource',
             'required'   => false,
             'filters'    => [
-                ['name'    => 'StripTags'],
-                ['name'    => 'StringTrim'],
+                ['name'    => StripTags::class],
+                ['name'    => StringTrim::class],
             ],
             'validators' => [
-                ['name'    => 'StringLength','options' => [
+                ['name'    => StringLength::class,'options' => [
                     'encoding' => 'UTF-8',
                     'min'      => 2,
                     'max'      => 255,
