@@ -19,7 +19,7 @@
     		<tr>
     			<td><?php echo $this->escapeHtml($row->getMenuItemId()); ?></td>
     			<td>
-                    <?php echo str_repeat('&nbsp;&nbsp;', ($row->getDepth())) . '&bull;&nbsp;'; ?>
+                    <?php echo str_repeat('&nbsp;&ndash;', ($row->getDepth())) . '&ndash;'; ?>
                     <?php echo $this->escapeHtml($row->getLabel()); ?></td>
     			<td><?php echo $this->escapeHtml($row->getParams()); ?></td>
     			<td><?php echo $this->escapeHtml($row->getRoute()); ?></td>

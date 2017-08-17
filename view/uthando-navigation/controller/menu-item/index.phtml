@@ -34,7 +34,7 @@
 $(document).ready(function(){
 	$('#table-menuItem').dataGrid({
     	url : '<?=$this->menuId?>/list',
-    	query: { sort : 'name' },
+    	query: { sort : 'lft' },
     	searchForm : $('#search-menuItem'),
     	paging : 'links',
     	columnSort: true

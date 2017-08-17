@@ -36,8 +36,8 @@ class MenuItem extends AbstractNestedSet
      */
 	public function search(array $search, $sort, $select = null)
 	{
-	    $select = $this->getSelect();
-	    $select->where->equalTo('menuId', $this->getMenuId());
+	    $select = $this->getFullTree();
+	    $select->where->equalTo('child.menuId', $this->getMenuId());
 	    
 	    return parent::search($search, $sort, $select);
 	}
