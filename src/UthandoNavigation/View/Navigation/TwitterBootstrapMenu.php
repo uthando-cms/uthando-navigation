@@ -31,6 +31,13 @@ class TwitterBootstrapMenu extends ZendMenu
     protected $ulClass = 'nav';
 
     /**
+     * CSS class to use for the li element
+     *
+     * @var string
+     */
+    protected $liClass = '';
+
+    /**
      * @var string
      */
     protected $subUlClass = 'dropdown-menu';
@@ -60,6 +67,23 @@ class TwitterBootstrapMenu extends ZendMenu
     public function setUlId($ulId)
     {
         $this->ulId = $ulId;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLiClass()
+    {
+        return $this->liClass;
+    }
+
+    /**
+     * @param string $liClass
+     */
+    public function setLiClass($liClass)
+    {
+        $this->liClass = $liClass;
         return $this;
     }
 
@@ -281,6 +305,7 @@ class TwitterBootstrapMenu extends ZendMenu
 
             // render li tag and page
             $liClasses = array();
+            $liClasses[] = $this->getLiClass();
             // Is page active?
             if ($isActive) {
                 $liClasses[] = 'active';
@@ -289,9 +314,9 @@ class TwitterBootstrapMenu extends ZendMenu
             if ($page->hasPages() && (!isset($maxDepth) || $depth < $maxDepth)) {
                 $liClasses[] = ($depth == 0) ? 'dropdown': 'dropdown-submenu';
                 $page->isDropdown = true;
-                
+
                 if ($depth > 0) {
-                	$page->isSubmenu = true;
+                    $page->isSubmenu = true;
                 }
             }
             // Add CSS class from page to <li>
@@ -364,9 +389,9 @@ class TwitterBootstrapMenu extends ZendMenu
         if ($page->isDropdown) {
             $attribs['data-toggle'] = 'dropdown';
             $class[] = 'dropdown-toggle';
-            
+
             if (!$page->isSubmenu && $this->getUseCaret()) {
-            	$extended = '<span class="caret"></span>';
+                $extended = '<span class="caret"></span>';
             }
         }
         if (count($class) > 0) {
