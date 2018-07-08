@@ -30,14 +30,16 @@
     </div>
 </div>
 
-<?php $this->inlineScript()->captureStart(); ?>
-$(document).ready(function(){
-	$('#table-menuItem').dataGrid({
-    	url : '<?=$this->menuId?>/list',
-    	query: { sort : 'lft' },
-    	searchForm : $('#search-menuItem'),
-    	paging : 'links',
-    	columnSort: true
-	});
-});
-<?php $this->inlineScript()->captureEnd(); ?>
+<?php $this->placeholder('js-scripts')->captureStart();?>
+<script>
+    $(document).ready(function(){
+        $('#table-menuItem').dataGrid({
+            url : '<?=$this->menuId?>/list',
+            query: { sort : 'lft' },
+            searchForm : $('#search-menuItem'),
+            paging : 'links',
+            columnSort: true
+        });
+    });
+</script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>
