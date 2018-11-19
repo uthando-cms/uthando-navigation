@@ -18,7 +18,7 @@ use UthandoUser\Model\ResourceTrait;
  * Class MenuItem
  * @package UthandoNavigation\Model
  */
-class MenuItem extends NestedSet
+class MenuItemModel extends NestedSet
 {   
     use Model,
         ResourceTrait;

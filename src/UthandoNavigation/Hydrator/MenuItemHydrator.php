@@ -17,12 +17,12 @@ use UthandoCommon\Hydrator\AbstractHydrator;
  * Class MenuItem
  * @package UthandoNavigation\Hydrator
  */
-class MenuItem extends AbstractHydrator
+class MenuItemHydrator extends AbstractHydrator
 {
 	protected $addDepth = false;
 	
 	/**
-	 * @param \UthandoNavigation\Model\MenuItem $object
+	 * @param \UthandoNavigation\Model\MenuItemModel $object
 	 * @return array $data
 	 */
 	public function extract($object)

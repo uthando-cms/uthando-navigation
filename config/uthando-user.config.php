@@ -1,8 +1,8 @@
 <?php
 
-use UthandoNavigation\Mvc\Controller\MenuController;
-use UthandoNavigation\Mvc\Controller\MenuItemController;
-use UthandoNavigation\Mvc\Controller\SiteMapController;
+use UthandoNavigation\Controller\MenuController;
+use UthandoNavigation\Controller\MenuItemController;
+use UthandoNavigation\Controller\SiteMapController;
 
 return [
     'uthando_user' => [

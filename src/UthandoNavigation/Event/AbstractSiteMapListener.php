@@ -10,6 +10,7 @@
 
 namespace UthandoNavigation\Event;
 
+use UthandoNavigation\Service\SiteMapService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateTrait;
@@ -45,7 +46,7 @@ abstract class AbstractSiteMapListener implements SiteMapListenerInterface, Serv
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach([
-            'UthandoNavigation\Service\SiteMap',
+            SiteMapService::class,
         ], ['uthando.site-map'], [$this, 'addPages']);
     }
 

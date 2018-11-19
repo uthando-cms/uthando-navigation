@@ -12,19 +12,22 @@
 namespace UthandoNavigation\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Hidden;
+use Zend\Form\Element\Text;
 use Zend\Form\Form;
 
 /**
  * Class Menu
  * @package UthandoNavigation\Form
  */
-class Menu extends Form
+class MenuForm extends Form
 {
 	public function init()
     {
         $this->add([
             'name' => 'menu',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Menu Title',
                 'required' => true,
@@ -41,13 +44,13 @@ class Menu extends Form
 
         $this->add([
             'name' => 'menuId',
-            'type' => 'hidden',
+            'type' => Hidden::class,
         ]);
 
 
         $this->add([
             'name' => 'security',
-            'type' => 'csrf',
+            'type' => Csrf::class,
         ]);
     }
 }

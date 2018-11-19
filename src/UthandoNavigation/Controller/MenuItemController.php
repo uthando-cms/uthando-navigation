@@ -9,9 +9,10 @@
  * @license   see LICENSE
  */
 
-namespace UthandoNavigation\Mvc\Controller;
+namespace UthandoNavigation\Controller;
 
 use UthandoCommon\Controller\AbstractCrudController;
+use UthandoNavigation\Service\MenuItemService;
 
 /**
  * Class MenuItemController
@@ -21,7 +22,7 @@ use UthandoCommon\Controller\AbstractCrudController;
 class MenuItemController extends AbstractCrudController
 {
 	protected $controllerSearchOverrides = ['sort' => 'lft'];
-	protected $serviceName = 'UthandoNavigationMenuItem';
+	protected $serviceName = MenuItemService::class;
 	protected $route = 'admin/menu-item';
 	
 	protected function setMenuId()

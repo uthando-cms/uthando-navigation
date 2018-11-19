@@ -8,17 +8,17 @@
  * @license   see LICENSE
  */
 
-namespace UthandoNavigation\Mvc\Controller;
+namespace UthandoNavigation\Controller;
 
 use UthandoCommon\Service\ServiceTrait;
-use UthandoNavigation\Service\SiteMap;
+use UthandoNavigation\Service\SiteMapService;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
  * Class SiteMapController
  *
- * @package UthandoNavigation\Mvc\Controller
- * @method SiteMap getService()
+ * @package UthandoNavigation\Controller
+ * @method SiteMapService getService()
  */
 class SiteMapController extends AbstractActionController
 {
@@ -29,7 +29,7 @@ class SiteMapController extends AbstractActionController
      */
     public function __construct()
     {
-        $this->serviceName = 'UthandoNavigationSiteMap';
+        $this->serviceName = SiteMapService::class;
     }
 
     /**

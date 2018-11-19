@@ -9,9 +9,10 @@
  * @license   see LICENSE
  */
 
-namespace UthandoNavigation\Mvc\Controller;
+namespace UthandoNavigation\Controller;
 
 use UthandoCommon\Controller\AbstractCrudController;
+use UthandoNavigation\Service\MenuService;
 
 /**
  * Class MenuController
@@ -21,7 +22,7 @@ use UthandoCommon\Controller\AbstractCrudController;
 class MenuController extends AbstractCrudController
 {
 	protected $controllerSearchOverrides = array('sort' => 'menu');
-	protected $serviceName = 'UthandoNavigationMenu';
+	protected $serviceName = MenuService::class;
 	protected $route = 'admin/menu';
 	
 }

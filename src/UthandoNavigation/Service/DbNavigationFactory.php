@@ -11,7 +11,9 @@
 
 namespace UthandoNavigation\Service;
 
+use UthandoCommon\Service\ServiceManager;
 use UthandoCommon\Stdlib\ArrayUtils;
+use UthandoNavigation\Model\MenuItemModel;
 use Zend\Config\Reader\Ini;
 use Zend\Navigation\Navigation;
 use Zend\Navigation\Service\AbstractNavigationFactory;
@@ -48,9 +50,9 @@ class DbNavigationFactory extends AbstractNavigationFactory
 
     protected function getPages(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $service \UthandoNavigation\Service\MenuItem */
-        $service = $serviceLocator->get('UthandoServiceManager')
-            ->getService('UthandoNavigationMenuItem');
+        /* @var $service MenuItemService */
+        $service = $serviceLocator->get(ServiceManager::class)
+            ->getService(MenuItemService::class);
 
         $config = new Ini();
 
@@ -62,7 +64,7 @@ class DbNavigationFactory extends AbstractNavigationFactory
 
         $pageArray = [];
 
-        /* @var $page \UthandoNavigation\Model\MenuItem */
+        /* @var $page MenuItemModel */
         foreach ($pages as $page) {
             $p = $page->getArrayCopy();
             $params = $config->fromString($p['params']);

@@ -11,6 +11,9 @@
 
 namespace UthandoNavigation\View\Navigation;
 
+use UthandoCommon\Service\ServiceManager;
+use UthandoNavigation\Service\MenuService;
+
 /**
  * Class DbMenuTrait
  *
@@ -27,10 +30,10 @@ trait DbMenuTrait
     {
         $this->multiArray = $useMultiArray;
 
-        /* @var $service \UthandoNavigation\Service\Menu */
+        /* @var $service \UthandoNavigation\Service\MenuService */
         $service = $this->getServiceLocator()
-            ->get('UthandoServiceManager')
-            ->get('UthandoNavigationMenu');
+            ->get(ServiceManager::class)
+            ->get(MenuService::class);
 
         $container = $service->getPages($container, $useMultiArray);
 

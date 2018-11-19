@@ -11,6 +11,7 @@
 
 namespace UthandoNavigation\Event;
 
+use UthandoNavigation\Service\MenuItemService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -29,7 +30,7 @@ class ServiceListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach([
-            'UthandoNavigation\Service\MenuItem'
+            MenuItemService::class
         ], ['form.init'], [$this, 'menuItemForm']);
     }
 

@@ -28,7 +28,7 @@ use Zend\Form\Form;
  * Class MenuItem
  * @package UthandoNavigation\Form
  */
-class MenuItem extends Form
+class MenuItemForm extends Form
 {
 	public function init()
 	{
@@ -102,6 +102,7 @@ class MenuItem extends Form
             'type' => Url::class,
             'options' => [
                 'label' => 'URI',
+                'required' => false,
                 'column-size' => 'sm-10',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'label_attributes' => [

@@ -11,13 +11,16 @@
 
 namespace UthandoNavigation\InputFilter;
 
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
 use Zend\InputFilter\InputFilter;
+use Zend\Validator\StringLength;
 
 /**
  * Class Menu
  * @package UthandoNavigation\InputFilter
  */
-class Menu extends InputFilter
+class MenuInputFilter extends InputFilter
 {
 	public function init()
 	{
@@ -25,12 +28,12 @@ class Menu extends InputFilter
             'name'       => 'menu',
             'required'   => true,
             'filters'    => [
-                ['name'    => 'StripTags'],
-                ['name'    => 'StringTrim'],
+                ['name'    => StripTags::class],
+                ['name'    => StringTrim::class],
             ],
             'validators' => [
                 [
-                    'name'    => 'StringLength',
+                    'name'    => StringLength::class,
                     'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 2,

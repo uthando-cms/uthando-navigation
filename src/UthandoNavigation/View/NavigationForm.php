@@ -26,11 +26,11 @@ class NavigationForm extends AbstractViewHelper
             ->getServiceLocator()
             ->get('UthandoServiceManager');
         
-    	/* @var $menuItemMapper \UthandoNavigation\Service\MenuItem */
+    	/* @var $menuItemMapper \UthandoNavigation\Service\MenuItemService */
         $menuItemMapper = $serviceManager->get('UthandoNavigationMenuItem');
         $menuItems = $menuItemMapper->fetchAll();
         
-        /* @var $menuMapper \UthandoNavigation\Service\Menu */
+        /* @var $menuMapper \UthandoNavigation\Service\MenuService */
         $menuMapper = $serviceManager->get('UthandoNavigationMenu');
         $menus = $menuMapper->fetchAll();
         
@@ -47,7 +47,7 @@ class NavigationForm extends AbstractViewHelper
             
         }
         
-        /* @var $page \UthandoNavigation\Model\MenuItem */
+        /* @var $page \UthandoNavigation\Model\MenuItemModel */
         foreach ($menuItems as $menuItem) {
             
             $ident = ($menuItem->getDepth() > 0) ? str_repeat('%space%%space%',($menuItem->getDepth())) . '%bull%%space%' : '';

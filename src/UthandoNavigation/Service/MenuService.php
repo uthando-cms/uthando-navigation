@@ -13,8 +13,12 @@ namespace UthandoNavigation\Service;
 
 use UthandoCommon\Service\AbstractMapperService;
 use UthandoCommon\Stdlib\ArrayUtils;
-use UthandoNavigation\Mapper\Menu as MenuMapper;
-use UthandoNavigation\Model\Menu as MenuModel;
+use UthandoNavigation\Form\MenuForm;
+use UthandoNavigation\Hydrator\MenuHydrator;
+use UthandoNavigation\InputFilter\MenuInputFilter;
+use UthandoNavigation\Mapper\MenuMapper;
+use UthandoNavigation\Model\MenuItemModel;
+use UthandoNavigation\Model\MenuModel;
 use Zend\Config\Reader\Ini;
 use Zend\Navigation\Navigation;
 
@@ -23,14 +27,15 @@ use Zend\Navigation\Navigation;
  * @package UthandoNavigation\Service
  * @method MenuMapper getMapper($mapperClass = null, array $options = [])
  */
-class Menu extends AbstractMapperService
+class MenuService extends AbstractMapperService
 {
     use NavigationTrait;
 
-    /**
-     * @var string
-     */
-    protected $serviceAlias = 'UthandoNavigationMenu';
+    protected $form         = MenuForm::class;
+    protected $hydrator     = MenuHydrator::class;
+    protected $inputFilter  = MenuInputFilter::class;
+    protected $mapper       = MenuMapper::class;
+    protected $model        = MenuModel::class;
 
     /**
      * @var bool
@@ -54,8 +59,8 @@ class Menu extends AbstractMapperService
      */
     public function getPages($menu = null, $multiArray = true)
     {
-        /* @var $service \UthandoNavigation\Service\MenuItem */
-        $service = $this->getService('UthandoNavigationMenuItem');
+        /* @var $service MenuItemService */
+        $service = $this->getService(MenuItemService::class);
 
         $config = new Ini();
 
@@ -67,7 +72,7 @@ class Menu extends AbstractMapperService
 
         $pageArray = [];
 
-        /* @var $page \UthandoNavigation\Model\MenuItem */
+        /* @var $page MenuItemModel */
         foreach ($pages as $page) {
             $p = $page->getArrayCopy();
             $params = $config->fromString($p['params']);

@@ -18,7 +18,7 @@ use Zend\Db\Sql\Select;
  * Class MenuItem
  * @package UthandoNavigation\Mapper
  */
-class MenuItem extends AbstractNestedSet
+class MenuItemMapper extends AbstractNestedSet
 {
 	protected $table = 'menuItem';
 	protected $primary = 'menuItemId';
@@ -75,7 +75,7 @@ class MenuItem extends AbstractNestedSet
     /**
      * @param int $menuId
      * @param string $label
-     * @return \UthandoNavigation\Model\MenuItem|null
+     * @return \UthandoNavigation\Model\MenuItemModel|null
      */
     public function getMenuItemByMenuIdAndLabel($menuId, $label)
     {

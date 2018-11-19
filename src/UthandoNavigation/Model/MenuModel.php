@@ -18,7 +18,7 @@ use UthandoCommon\Model\ModelInterface;
  * Class Menu
  * @package UthandoNavigation\Model
  */
-class Menu implements ModelInterface
+class MenuModel implements ModelInterface
 {
     use Model;
     

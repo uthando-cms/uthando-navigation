@@ -11,6 +11,9 @@
 
 namespace UthandoNavigation\Form\Element;
 
+use UthandoCommon\Service\ServiceManager;
+use UthandoNavigation\Service\MenuItemService;
+use UthandoNavigation\Service\MenuService;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -61,13 +64,13 @@ class MenuItemList extends Select implements ServiceLocatorAwareInterface
     {
         $serviceManager = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager');
+            ->get(ServiceManager::class);
 
-        /* @var $menuItemMapper \UthandoNavigation\Service\MenuItem */
-        $menuItemMapper = $serviceManager->get('UthandoNavigationMenuItem');
+        /* @var $menuItemMapper MenuItemService */
+        $menuItemMapper = $serviceManager->get(MenuItemService::class);
 
-        /* @var $menuMapper \UthandoNavigation\Service\Menu */
-        $menuMapper = $serviceManager->get('UthandoNavigationMenu');
+        /* @var $menuMapper MenuService */
+        $menuMapper = $serviceManager->get(MenuService::class);
 
         $menuItemsOptions   = [];
         $menuArray          = [];
@@ -86,7 +89,7 @@ class MenuItemList extends Select implements ServiceLocatorAwareInterface
             $menuItemsOptions[$menu->getMenuId()]['label'] = $menu->getMenu();
         }
 
-        /* @var $page \UthandoNavigation\Model\MenuItem */
+        /* @var $page \UthandoNavigation\Model\MenuItemModel */
         foreach ($items as $menuItem) {
             $ident = ($menuItem->getDepth() > 0) ? str_repeat('&nbsp;&nbsp;',($menuItem->getDepth())) . '&bull;&nbsp;' : '';
             $menuItemsOptions[$menuItem->getMenuId()]['options'][] = [

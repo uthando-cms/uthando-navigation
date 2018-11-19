@@ -1,5 +1,8 @@
 <?php
 
+use UthandoNavigation\Controller\MenuController;
+use UthandoNavigation\Controller\MenuItemController;
+
 return [
     'router' => [
         'routes' => [
@@ -10,8 +13,8 @@ return [
                         'options' => [
                             'route' => '/menu',
                             'defaults' => [
-                                '__NAMESPACE__' => 'UthandoNavigation\Mvc\Controller',
-                                'controller' => 'MenuController',
+                                '__NAMESPACE__' => 'UthandoNavigation\Controller',
+                                'controller' => MenuController::class,
                                 'action' => 'index',
                             ],
                         ],
@@ -54,8 +57,8 @@ return [
                                 'menuId' => '\d+',
                             ],
                             'defaults' => [
-                                '__NAMESPACE__' => 'UthandoNavigation\Mvc\Controller',
-                                'controller' => 'MenuItemController',
+                                '__NAMESPACE__' => 'UthandoNavigation\Controller',
+                                'controller' => MenuItemController::class,
                                 'action' => 'index',
                             ],
                         ],

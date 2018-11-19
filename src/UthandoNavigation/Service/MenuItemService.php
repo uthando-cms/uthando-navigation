@@ -14,6 +14,11 @@ namespace UthandoNavigation\Service;
 use UthandoCommon\Mapper\AbstractNestedSet;
 use UthandoCommon\Service\AbstractMapperService;
 use UthandoCommon\Model\ModelInterface;
+use UthandoNavigation\Form\MenuItemForm;
+use UthandoNavigation\Hydrator\MenuItemHydrator;
+use UthandoNavigation\InputFilter\MenuItemInputFilter;
+use UthandoNavigation\Mapper\MenuItemMapper;
+use UthandoNavigation\Model\MenuItemModel;
 use Zend\Form\Form;
 use Exception;
 
@@ -21,12 +26,13 @@ use Exception;
  * Class MenuItem
  * @package UthandoNavigation\Service
  */
-class MenuItem extends AbstractMapperService
+class MenuItemService extends AbstractMapperService
 {
-    /**
-     * @var string
-     */
-    protected $serviceAlias = 'UthandoNavigationMenuItem';
+    protected $form         = MenuItemForm::class;
+    protected $hydrator     = MenuItemHydrator::class;
+    protected $inputFilter  = MenuItemInputFilter::class;
+    protected $mapper       = MenuItemMapper::class;
+    protected $model        = MenuItemModel::class;
 
     /**
      * @param $menuId

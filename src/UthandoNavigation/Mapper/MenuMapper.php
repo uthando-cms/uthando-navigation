@@ -17,14 +17,14 @@ use UthandoCommon\Mapper\AbstractDbMapper;
  * Class Menu
  * @package UthandoNavigation\Mapper
  */
-class Menu extends AbstractDbMapper
+class MenuMapper extends AbstractDbMapper
 {
 	protected $table = 'menu';
 	protected $primary = 'menuId';
 
     /**
      * @param int $menu
-     * @return null|\UthandoNavigation\Model\Menu
+     * @return null|\UthandoNavigation\Model\MenuModel
      */
 	public function getMenu($menu)
 	{

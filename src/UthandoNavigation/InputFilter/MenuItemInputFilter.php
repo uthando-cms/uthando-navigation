@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
  * @license   see LICENSE.txt
  */
+
 namespace UthandoNavigation\InputFilter;
 
 use UthandoCommon\Filter\Ucwords;
@@ -22,7 +23,7 @@ use Zend\Validator\Uri;
  * Class MenuItem
  * @package UthandoNavigation\InputFilter
  */
-class MenuItem extends InputFilter
+class MenuItemInputFilter extends InputFilter
 {
 	public function init()
 	{
@@ -91,6 +92,7 @@ class MenuItem extends InputFilter
 		$this->add([
             'name'       => 'resource',
             'required'   => false,
+            'allow_empty' => true,
             'filters'    => [
                 ['name'    => StripTags::class],
                 ['name'    => StringTrim::class],
